@@ -1,0 +1,33 @@
+{
+  "name": "lim011-fe-md-links",
+  "version": "1.0.0",
+  "description": "libreria que lee y analiza archivos markdown",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "htmlhint": "^0.11.0",
+    "jest": "^25.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/YamiQuispe/LIM011-fe-md-links.git"
+  },
+  "keywords": [
+    "md-links",
+    "markdown",
+    "node.js",
+    "javascript"
+  ],
+  "author": "buscoanemo",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/YamiQuispe/LIM011-fe-md-links/issues"
+  },
+  "homepage": "https://github.com/YamiQuispe/LIM011-fe-md-links#readme"
+}
