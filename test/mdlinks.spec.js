@@ -68,6 +68,6 @@ describe('Valido el tipo de archivo recibido.', () => {
 
   it('Debería detectar si es un archivo diferente al formato md.', () => {
     const root = '/md/directory/index.html';
-    expect(path.parse(root).ext).toBe();
+    expect(path.parse(root).ext).toBe('.md');
   });
 });

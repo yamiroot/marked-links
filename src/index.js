@@ -1,35 +1,75 @@
-// const path = require('path');
+const path = require('path');
+const fs = require('fs');
 
-const rootConvertAbsolute = (root) => {
-  // Proceso de conversión....
 
-  console.log(root);
-};
+// path.resolve(root): Devuelve un String.
+const pathConvertAbsolute = (newPath) => path.resolve(newPath);
 
-const rootIsAbsolute = (root) => {
-  if (root) {
-    if (root === 'absoluta') {
-      return root;
-    }
-    return rootConvertAbsolute(root);
+
+const pathIsAbsolute = (newPath) => {
+  // path.isAbsolute(root): Retorna un booleano.
+
+  if (path.isAbsolute(newPath)) {
+    return newPath;
   }
-  return root;
+
+  return pathConvertAbsolute(newPath);
 };
 
 
-const validateArchiveDirectory = (root) => {
-  console.log(root);
+// path.parse(path): Retorna un objeto.
+// path.extname(path): Devuelve la extensión de la ruta. (String)
+const validateTypeArchive = (newPath) => path.extname(newPath);
+
+
+// fs.stats.isFile(): Devuelve un booleano.
+const validateArchive = (newPath) => fs.stats.isFile(newPath);
+
+
+// fs.stats.isDirectory(): Devuelve un booleano.
+const validateDirectory = (newPath) => fs.stats.isDirectory(newPath);
+
+
+const validateLinks = (newPath) => {
+  const array = [];
+/*   if (reply) {
+
+  } */
 };
 
 
-const validateTypeArchive = (root) => {
-  console.log(root);
+const mdLinks = (newPath, opts) => {
+  if ((typeof newPath) === 'string') {
+    const pathValidated = pathIsAbsolute(newPath);
+
+    if (validateArchive(pathValidated)) {
+      if (validateTypeArchive(pathValidated) === '.md') {
+        if (opts.validate) {
+          return validateLinks(pathValidated);
+        }
+
+        return validateLinks(pathValidated);
+      }
+      // return console.log('El archivo recibido no es de formato ".md".');
+    } else if (validateDirectory(pathValidated)) {
+      // ...
+    }
+  }
+
+  return console.log('El dato ingresado no es String.');
 };
+
+mdLinks('archivo.md');
 
 
 module.exports = {
-  rootConvertAbsolute,
-  rootIsAbsolute,
-  validateArchiveDirectory,
+  pathConvertAbsolute,
+  pathIsAbsolute,
+  validateArchive,
   validateTypeArchive,
 };
+
+// 200 - 359 - ok;
+
+// status: numero
+// ok: ok / fail
