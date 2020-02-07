@@ -1,5 +1,6 @@
 const path = require('path');
 const fs = require('fs');
+const url = require('url');
 
 
 // path.resolve(root): Devuelve un String.
@@ -32,10 +33,10 @@ const validateDirectory = (newPath) => fs.statSync(newPath).isDirectory();
 // console.log(validateDirectory('src'));
 
 
-const validateMarkdownsDirectory = (newPath) => {
+const validateMarkdowns = (newPath) => {
   // fs.readdirSync (ruta, opciones): Lee la ruta y devuelve una array de Strings(rutas).
   const arrayPaths = fs.readdirSync(newPath, 'utf-8');
-  let arrayLinksMarkdown = [];
+  let arrayOfLinksMarkdown = [];
 
   arrayPaths.forEach((file) => {
     // path.join([...paths]): Retorna un String.
@@ -47,31 +48,54 @@ const validateMarkdownsDirectory = (newPath) => {
       // origen, ya que respeta el alcance de la función. Por ende, no afecta al valor
       // acumulado.
 
-      const array = validateMarkdownsDirectory(pathName);
+      const array = validateMarkdowns(pathName);
 
-      arrayLinksMarkdown = arrayLinksMarkdown.concat(array);
+      arrayOfLinksMarkdown = arrayOfLinksMarkdown.concat(array);
     }
 
     if (validateArchive(pathName)) {
       if (validateTypeArchive(pathName) === '.md') {
-        // console.log('Rutas de md: ', pathName);
-        arrayLinksMarkdown.push(pathName);
+        arrayOfLinksMarkdown.push(pathName);
       }
     }
   });
 
-  return arrayLinksMarkdown;
+  return arrayOfLinksMarkdown;
 };
 
-// 2 archivos y 1 carpeta(1 archivo md)
-console.log(validateMarkdownsDirectory('/home/administrador/Escritorio/JsProject/LIM011-fe-md-links'));
+// console.log(validateMarkdowns('/home/administrador/Escritorio/JsProject/LIM011-fe-md-links'));
 
 
-const mdLinks = (newPath) => {
+const informationMarkdowns = (arrayLinksMarkdown) => {
+  const arrayInformation = [];
+
+  arrayLinksMarkdown.forEach((link) => {
+    arrayInformation.push({
+      href: (new URL(link)).href,
+      text: (new URL(link)).pathname,
+    });
+  });
+
+  return arrayInformation;
+};
+
+
+const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
+  return fs.readFileSync(arrayOfLinksMarkdown, null);
+};
+
+console.log('info', linksOfArchivesMarkdown('/home/administrador/Escritorio/HTML/7-abreviaturas.html'));
+
+
+const mdLinks = (newPath, opts) => {
   if ((typeof newPath) === 'string') {
     const pathValidated = pathIsAbsolute(newPath);
 
-    validateMarkdowns(pathValidated);
+    const arrayMarkdowns = validateMarkdowns(pathValidated);
+
+    if (opts.validate) {
+      // ...
+    }
   }
 
   return console.log('El dato ingresado no es String.');
@@ -85,6 +109,7 @@ module.exports = {
   pathConvertAbsolute,
   pathIsAbsolute,
   validateArchive,
+  validateDirectory,
   validateTypeArchive,
 };
 
@@ -108,20 +133,3 @@ console.log(myURL.href); -> Devuelve un string
 console.log(myURL.pathname); -> Devuelve un string
 
 */
-
-/*
-const validateLinks = (newPath, validate) => {
-  const array = [];
-
-  if (validate) {
-    array.push(newPath);
-  }
-
-  /* if (opts.validate) {
-      return validateLinks(pathValidated);
-    }
-
-    return validateLinks(pathValidated); */
-/*
-  return array;
-}; */

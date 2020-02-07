@@ -2,12 +2,12 @@ const path = require('path');
 const fs = require('fs');
 
 const {
-  rootConvertAbsolute, rootIsAbsolute, validateArchiveDirectory, validateTypeArchive,
+  pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory, validateTypeArchive,
 } = require('../src/index.js');
 
 describe('Valido el tipo de ruta recibido.', () => {
   it('Debería ser una función.', () => {
-    expect(typeof rootIsAbsolute).toBe('function');
+    expect(typeof pathIsAbsolute).toBe('function');
   });
 
   /* it('La ruta debería ser un String.', () => {
@@ -16,42 +16,44 @@ describe('Valido el tipo de ruta recibido.', () => {
     }); */
 
   it('Debería detectar si la ruta recibida es absoluta.', () => {
-    const root = '/md/newruta.js';
-    expect(path.isAbsolute(rootIsAbsolute(root))).toBe(true);
-  });
-
-  it('Debería detectar si la ruta recibida es relativa.', () => {
-    const root = '/md/newruta';
-    expect(path.isAbsolute(rootIsAbsolute(root))).toBe(false);
+    const newPath = '/md/newruta.js';
+    expect(path.isAbsolute(pathIsAbsolute(newPath))).toBe(true);
   });
 });
 
 
 describe('Convertir ruta relativa a absoluta.', () => {
   it('Debería ser una función.', () => {
-    expect(typeof rootConvertAbsolute).toBe('function');
+    expect(typeof pathConvertAbsolute).toBe('function');
   });
 
   it('Si la ruta recibida es relativa debería convertir a absoluta.', () => {
-    const root = 'newruta';
-    expect(path.isAbsolute(rootConvertAbsolute(root))).toBe(true);
+    const newPath = '/newruta';
+    expect(path.isAbsolute(pathConvertAbsolute(newPath))).toBe(true);
   });
 });
 
 
-describe('Valido si recibo un archivo o directorio.', () => {
+describe('Valido si recibo un archivo.', () => {
   it('Debería ser una función.', () => {
-    expect(typeof validateArchiveDirectory).toBe('function');
+    expect(typeof validateArchive).toBe('function');
   });
 
   it('Debería detectar si es un archivo.', () => {
-    const root = '/md/archive.md';
-    expect(fs.stats.isFile(validateArchiveDirectory(root))).toBe(true);
+    const newPath = '/home/administrador/Escritorio/HTML/0-doctype.html';
+    expect(validateArchive(newPath)).toBe(true);
+  });
+});
+
+
+describe('Valido si recibo un directorio.', () => {
+  it('Debería ser una función.', () => {
+    expect(typeof validateDirectory).toBe('function');
   });
 
   it('Debería detectar si es un directorio.', () => {
-    const root = '/md/directory';
-    expect(fs.stats.isDirectory(validateArchiveDirectory(root))).toBe(true);
+    const newPath = '/home/administrador/Escritorio/HTML';
+    expect(validateDirectory(newPath)).toBe(true);
   });
 });
 
@@ -62,12 +64,12 @@ describe('Valido el tipo de archivo recibido.', () => {
   });
 
   it('Debería detectar si es un archivo md.', () => {
-    const root = '/md/archive.md';
-    expect(path.parse(root).ext).toBe('.md');
+    const newPath = '/home/administrador/Escritorio/JsProject/LIM011-fe-md-links/README.md';
+    expect(validateTypeArchive(newPath)).toBe('.md');
   });
 
   it('Debería detectar si es un archivo diferente al formato md.', () => {
-    const root = '/md/directory/index.html';
-    expect(path.parse(root).ext).toBe('.md');
+    const newPath = '/home/administrador/Escritorio/HTML/7-abreviaturas.html';
+    expect(validateTypeArchive(newPath)).toBe('.html');
   });
 });
