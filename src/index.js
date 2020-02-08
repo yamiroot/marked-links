@@ -1,6 +1,12 @@
 const path = require('path');
 const fs = require('fs');
-const url = require('url');
+// const url = require('url');
+
+// Create reference instance
+const marked = require('marked');
+const jsdom = require('jsdom');
+
+const { JSDOM } = jsdom;
 
 
 // path.resolve(root): Devuelve un String.
@@ -81,28 +87,40 @@ const informationMarkdowns = (arrayLinksMarkdown) => {
 
 
 const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
-  return fs.readFileSync(arrayOfLinksMarkdown, null);
+  const array = [];
+
+  arrayOfLinksMarkdown.forEach((file) => {
+    const markdown = fs.readFileSync(file, 'utf-8');
+    const tokens = marked.lexer(markdown);
+    const html = marked.parser(tokens);
+    const dom = new JSDOM(html);
+
+    const linksOfMarkdown = dom.window.document.querySelectorAll('a');
+
+    array.push(linksOfMarkdown);
+  });
+
+  console.log(array);
 };
 
-console.log('info', linksOfArchivesMarkdown('/home/administrador/Escritorio/HTML/7-abreviaturas.html'));
+// console.log('info', linksOfArchivesMarkdown('/home/administrador/Escritorio/HTML/7-abreviaturas.html'));
+// process.cwd -> Para poner directorio actual de la carpeta respecto a rutas
+// comando pwd
 
 
-const mdLinks = (newPath, opts) => {
+const mdLinks = (newPath) => {
   if ((typeof newPath) === 'string') {
     const pathValidated = pathIsAbsolute(newPath);
-
     const arrayMarkdowns = validateMarkdowns(pathValidated);
-
-    if (opts.validate) {
-      // ...
-    }
+    const retorno = linksOfArchivesMarkdown(arrayMarkdowns);
+    console.log(retorno);
   }
 
-  return console.log('El dato ingresado no es String.');
+  return null;
 };
 
 
-// mdLinks('/home/administrador/Escritorio/CSS');
+mdLinks('/home/administrador/Escritorio/Markdown');
 
 
 module.exports = {
