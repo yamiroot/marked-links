@@ -1,12 +1,12 @@
+// Librerías node.js
 const path = require('path');
 const fs = require('fs');
-// const url = require('url');
 
-// Create reference instance
+// Librerías Js
 const marked = require('marked');
 const jsdom = require('jsdom');
 
-const { JSDOM } = jsdom;
+const { JSDOM } = jsdom; // Destructuración
 
 
 // path.resolve(root): Devuelve un String.
@@ -80,24 +80,31 @@ const validateMarkdownsDirectory = (newPath) => {
   return arrayOfLinksMarkdown;
 };
 
-// console.log(validateMarkdowns('/home/administrador/Escritorio/JsProject/LIM011-fe-md-links'));
-
 
 const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
-  const array = [];
+  const arrayLinksArchive = [];
 
-  arrayOfLinksMarkdown.forEach((file) => {
-    const markdown = fs.readFileSync(file, 'utf-8');
+  arrayOfLinksMarkdown.forEach((fileMarkdown) => {
+    const markdown = fs.readFileSync(fileMarkdown, 'utf-8');
     const tokens = marked.lexer(markdown);
     const html = marked.parser(tokens);
     const dom = new JSDOM(html);
 
     const linksOfMarkdown = dom.window.document.querySelectorAll('a');
 
-    array.push(linksOfMarkdown);
+    linksOfMarkdown.forEach((link) => {
+      arrayLinksArchive.push({
+        href: link.href,
+        text: link.text,
+        file: fileMarkdown,
+      });
+    });
   });
 
-  console.log(array);
+  console.log(arrayLinksArchive);
+  console.log(arrayLinksArchive.length);
+
+  return arrayLinksArchive;
 };
 
 
@@ -112,9 +119,9 @@ const mdLinks = (newPath) => {
     }
 
     if (validateArchive(pathValidated)) {
-      const arrayLinkOfArchive = validateMarkdownsArchive(pathValidated);
+      const arrayLinksOfArchive = validateMarkdownsArchive(pathValidated);
 
-      linksOfArchivesMarkdown(arrayLinkOfArchive);
+      linksOfArchivesMarkdown(arrayLinksOfArchive);
     }
   }
 
