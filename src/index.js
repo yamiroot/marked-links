@@ -39,7 +39,18 @@ const validateDirectory = (newPath) => fs.statSync(newPath).isDirectory();
 // console.log(validateDirectory('src'));
 
 
-const validateMarkdowns = (newPath) => {
+const validateMarkdownsArchive = (newPath) => {
+  const arrayOfLinksMarkdown = [];
+
+  if (validateTypeArchive(newPath) === '.md') {
+    arrayOfLinksMarkdown.push(newPath);
+  }
+
+  return arrayOfLinksMarkdown;
+};
+
+
+const validateMarkdownsDirectory = (newPath) => {
   // fs.readdirSync (ruta, opciones): Lee la ruta y devuelve una array de Strings(rutas).
   const arrayPaths = fs.readdirSync(newPath, 'utf-8');
   let arrayOfLinksMarkdown = [];
@@ -54,7 +65,7 @@ const validateMarkdowns = (newPath) => {
       // origen, ya que respeta el alcance de la función. Por ende, no afecta al valor
       // acumulado.
 
-      const array = validateMarkdowns(pathName);
+      const array = validateMarkdownsDirectory(pathName);
 
       arrayOfLinksMarkdown = arrayOfLinksMarkdown.concat(array);
     }
@@ -70,20 +81,6 @@ const validateMarkdowns = (newPath) => {
 };
 
 // console.log(validateMarkdowns('/home/administrador/Escritorio/JsProject/LIM011-fe-md-links'));
-
-
-const informationMarkdowns = (arrayLinksMarkdown) => {
-  const arrayInformation = [];
-
-  arrayLinksMarkdown.forEach((link) => {
-    arrayInformation.push({
-      href: (new URL(link)).href,
-      text: (new URL(link)).pathname,
-    });
-  });
-
-  return arrayInformation;
-};
 
 
 const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
@@ -103,17 +100,22 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
   console.log(array);
 };
 
-// console.log('info', linksOfArchivesMarkdown('/home/administrador/Escritorio/HTML/7-abreviaturas.html'));
-// process.cwd -> Para poner directorio actual de la carpeta respecto a rutas
-// comando pwd
-
 
 const mdLinks = (newPath) => {
   if ((typeof newPath) === 'string') {
     const pathValidated = pathIsAbsolute(newPath);
-    const arrayMarkdowns = validateMarkdowns(pathValidated);
-    const retorno = linksOfArchivesMarkdown(arrayMarkdowns);
-    console.log(retorno);
+
+    if (validateDirectory(pathValidated)) {
+      const arrayLinksOfDirectory = validateMarkdownsDirectory(pathValidated);
+
+      linksOfArchivesMarkdown(arrayLinksOfDirectory);
+    }
+
+    if (validateArchive(pathValidated)) {
+      const arrayLinkOfArchive = validateMarkdownsArchive(pathValidated);
+
+      linksOfArchivesMarkdown(arrayLinkOfArchive);
+    }
   }
 
   return null;
@@ -149,5 +151,22 @@ console.log(myURL.href); -> Devuelve un string
 
     file: Ruta del archivo donde se encontró el link. -> const myURL = new URL('https://example.org/abc/xyz?123');
 console.log(myURL.pathname); -> Devuelve un string
+
+
+const informationMarkdowns = (arrayLinksMarkdown) => {
+  const arrayInformation = [];
+
+  arrayLinksMarkdown.forEach((link) => {
+    arrayInformation.push({
+      href: (new URL(link)).href,
+      text: (new URL(link)).pathname,
+    });
+  });
+
+  return arrayInformation;
+};
+'info', linksOfArchivesMarkdown('/home/administrador/Escritorio/HTML/7-abreviaturas.html'));
+// process.cwd -> Para poner directorio actual de la carpeta respecto a rutas
+// comando pwd
 
 */
