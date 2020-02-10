@@ -5,31 +5,26 @@ const {
   pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory, validateTypeArchive,
 } = require('../src/index.js');
 
+
 describe('Valido el tipo de ruta recibido.', () => {
-  it('Debería ser una función.', () => {
+  it('Debería ser una función: pathIsAbsolute.', () => {
     expect(typeof pathIsAbsolute).toBe('function');
   });
-
-  /* it('La ruta debería ser un String.', () => {
-        const root = 'newruta';
-        expect(path.isAbsolute()).toBe('String');
-    }); */
 
   it('Debería detectar si la ruta recibida es absoluta.', () => {
     const newPath = '/md/newruta.js';
     expect(path.isAbsolute(pathIsAbsolute(newPath))).toBe(true);
   });
-});
 
-
-describe('Convertir ruta relativa a absoluta.', () => {
-  it('Debería ser una función.', () => {
+  it('Debería ser una función: pathConvertAbsolute.', () => {
     expect(typeof pathConvertAbsolute).toBe('function');
   });
 
-  it('Si la ruta recibida es relativa debería convertir a absoluta.', () => {
-    const newPath = '/newruta';
-    expect(path.isAbsolute(pathConvertAbsolute(newPath))).toBe(true);
+  it('Debería convertir a absoluta, si la ruta recibida es relativa.', () => {
+    const newPath = 'Markdown';
+    if (pathIsAbsolute(newPath) === false) {
+      expect(pathConvertAbsolute(newPath)).toBe(true);
+    }
   });
 });
 
@@ -73,3 +68,8 @@ describe('Valido el tipo de archivo recibido.', () => {
     expect(validateTypeArchive(newPath)).toBe('.html');
   });
 });
+
+/* it('La ruta debería ser un String.', () => {
+        const root = 'newruta';
+        expect(path.isAbsolute()).toBe('String');
+    }); */

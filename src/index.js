@@ -71,9 +71,11 @@ const validateMarkdownsDirectory = (newPath) => {
     }
 
     if (validateArchive(pathName)) {
-      if (validateTypeArchive(pathName) === '.md') {
-        arrayOfLinksMarkdown.push(pathName);
-      }
+      const arrayArchivesMarkdown = validateMarkdownsArchive(pathName);
+
+      arrayArchivesMarkdown.forEach((markdown) => {
+        arrayOfLinksMarkdown.push(markdown);
+      });
     }
   });
 
@@ -129,7 +131,7 @@ const mdLinks = (newPath) => {
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown');
+mdLinks('/home/administrador/Escritorio/Markdown/Readme.md');
 
 
 module.exports = {
