@@ -1,5 +1,5 @@
-const path = require('path');
-const fs = require('fs');
+// const path = require('path');
+// const fs = require('fs');
 
 const {
   pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory, validateTypeArchive,
@@ -23,9 +23,7 @@ describe('Valido el tipo de ruta recibido.', () => {
 
   it('Debería convertir a absoluta, si la ruta recibida es relativa.', () => {
     const newPath = 'Markdown';
-    if (pathIsAbsolute(newPath) === false) {
-      expect(pathIsAbsolute(newPath)).toBe(pathConvertAbsolute(newPath));
-    }
+    expect(pathIsAbsolute(newPath)).toBe(pathConvertAbsolute(newPath));
   });
 });
 

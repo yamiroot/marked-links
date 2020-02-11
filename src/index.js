@@ -104,8 +104,8 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
     });
   });
 
-  console.log(arrayLinksArchive);
-  console.log(arrayLinksArchive.length);
+  /*   console.log(arrayLinksArchive);
+  console.log(arrayLinksArchive.length); */
 
   return arrayLinksArchive;
 };
@@ -115,12 +115,42 @@ const validateLinksStatus = (arrayLinksArchive) => {
   arrayLinksArchive.forEach((link) => {
     const fetchPromise = fetch(link.href);
 
+    fetchPromise
+      .then((response) => {
+        link.status = response.status;
+        // link.push(response.status);
+
+        // Object.defineProperty(link, 'status', { value: response.status });
+        console.log(link, ' ', link.status);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
 
     // console.log(link.href);
 
     // console.log(fetchPromise);
   });
 };
+
+validateLinksStatus([{
+  href:
+  'https://dzone.com/articles/how-single-page-web-applications-actually-work',
+  text: 'SPA',
+  file: '/home/administrador/Escritorio/Markdown/Readme.md',
+},
+{
+  href:
+  'https://darwindigital.com/mobile-fir-responsive-web-design/',
+  text: 'mobile first',
+  file: '/home/administrador/Escritorio/Markdown/Readme.md',
+},
+{
+  href:
+  'https://darwindicom/mobile-fir-responsive-web-design/',
+  text: 'mobile first',
+  file: '/home/administrador/Escritorio/Markdown/Readme.md',
+}]);
 
 
 const mdLinks = (newPath) => {
@@ -148,7 +178,7 @@ const mdLinks = (newPath) => {
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown');
+// mdLinks('/home/administrador/Escritorio/Markdown');
 
 
 module.exports = {
