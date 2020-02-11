@@ -3,7 +3,7 @@ const fs = require('fs');
 
 const {
   pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory, validateTypeArchive,
-  validateMarkdownsArchive, validateMarkdownsDirectory,
+  validateMarkdownsArchive, validateMarkdownsDirectory, linksOfArchivesMarkdown,
 } = require('../src/index.js');
 
 
@@ -95,7 +95,6 @@ describe('Valido si el directorio recibido contiene archivos markdown.', () => {
   it('Debería leer el directorio y devolver un array de archivos/directorios encontrados.', () => {
     const newPath = '/home/administrador/Escritorio/Markdown';
     const arrayPaths = [
-      '/home/administrador/Escritorio/Markdown/README.md',
       '/home/administrador/Escritorio/Markdown/Readme.md',
       '/home/administrador/Escritorio/Markdown/TestMarkdown/readme.md',
     ];
@@ -107,8 +106,46 @@ describe('Valido si el directorio recibido contiene archivos markdown.', () => {
 });
 
 
-describe('', () => {
-  
+describe('Valido la información de los links en cada archivo markdown.', () => {
+  it('Debería ser una función.', () => {
+    expect(typeof linksOfArchivesMarkdown).toBe('function');
+  });
+
+  it('Debería devolver un array de objetos con las propiedades: href, text y file.', () => {
+    const arrayPaths = [
+      '/home/administrador/Escritorio/Markdown/Readme.md',
+      '/home/administrador/Escritorio/Markdown/TestMarkdown/readme.md',
+    ];
+
+    const informationLinks = [{
+      href:
+      'https://dzone.com/articles/how-single-page-web-applications-actually-work',
+      text: 'SPA',
+      file: '/home/administrador/Escritorio/Markdown/Readme.md',
+    },
+    {
+      href:
+      'https://darwindigital.com/mobile-first-versus-responsive-web-design/',
+      text: 'mobile first',
+      file: '/home/administrador/Escritorio/Markdown/Readme.md',
+    },
+    {
+      href:
+      'https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import',
+      text: 'import',
+      file:
+      '/home/administrador/Escritorio/Markdown/TestMarkdown/readme.md',
+    },
+    {
+      href:
+      'https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/export',
+      text: 'export',
+      file:
+      '/home/administrador/Escritorio/Markdown/TestMarkdown/readme.md',
+    }];
+
+    expect(linksOfArchivesMarkdown(arrayPaths)).toStrictEqual(informationLinks);
+  });
 });
 
 

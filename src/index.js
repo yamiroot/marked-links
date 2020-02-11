@@ -104,8 +104,8 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
     });
   });
 
-  // console.log(arrayLinksArchive);
-  // console.log(arrayLinksArchive.length);
+  console.log(arrayLinksArchive);
+  console.log(arrayLinksArchive.length);
 
   return arrayLinksArchive;
 };
@@ -148,7 +148,7 @@ const mdLinks = (newPath) => {
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown/README.md');
+mdLinks('/home/administrador/Escritorio/Markdown');
 
 
 module.exports = {
@@ -159,6 +159,7 @@ module.exports = {
   validateTypeArchive,
   validateMarkdownsArchive,
   validateMarkdownsDirectory,
+  linksOfArchivesMarkdown,
 };
 
 
