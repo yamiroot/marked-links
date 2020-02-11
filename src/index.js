@@ -2,9 +2,10 @@
 const path = require('path');
 const fs = require('fs');
 
-// Librerías Js
+// Librerías de Nodejs
 const marked = require('marked');
 const jsdom = require('jsdom');
+const fetch = require('node-fetch');
 
 const { JSDOM } = jsdom; // Destructuración
 
@@ -142,39 +143,21 @@ module.exports = {
   validateTypeArchive,
 };
 
+
+/*
+Pendiente hoy:
+fetch debe estar en otra función.
+Pruebo fetch, y fetch recibe una url. Esta url esta en el objeto de links gg.
+Debo probar fetch en cada link.
+*/
+
 // 200 - 359 - ok;
 
 // status: numero
 // ok: ok / fail
 
 
-// path.dirname(path)
-
-
 /*
-
-    href: URL encontrada. -> const myURL = new URL('https://example.org/foo');
-console.log(myURL.href); -> Devuelve un string
-
-    text: Texto que aparecía dentro del link (<a>).
-
-    file: Ruta del archivo donde se encontró el link. -> const myURL = new URL('https://example.org/abc/xyz?123');
-console.log(myURL.pathname); -> Devuelve un string
-
-
-const informationMarkdowns = (arrayLinksMarkdown) => {
-  const arrayInformation = [];
-
-  arrayLinksMarkdown.forEach((link) => {
-    arrayInformation.push({
-      href: (new URL(link)).href,
-      text: (new URL(link)).pathname,
-    });
-  });
-
-  return arrayInformation;
-};
-'info', linksOfArchivesMarkdown('/home/administrador/Escritorio/HTML/7-abreviaturas.html'));
 // process.cwd -> Para poner directorio actual de la carpeta respecto a rutas
 // comando pwd
 
