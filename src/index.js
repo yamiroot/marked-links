@@ -104,10 +104,22 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
     });
   });
 
-  console.log(arrayLinksArchive);
-  console.log(arrayLinksArchive.length);
+  // console.log(arrayLinksArchive);
+  // console.log(arrayLinksArchive.length);
 
   return arrayLinksArchive;
+};
+
+
+const validateLinksStatus = (arrayLinksArchive) => {
+  arrayLinksArchive.forEach((link) => {
+    const fetchPromise = fetch(link.href);
+
+
+    // console.log(link.href);
+
+    // console.log(fetchPromise);
+  });
 };
 
 
@@ -118,13 +130,17 @@ const mdLinks = (newPath) => {
     if (validateDirectory(pathValidated)) {
       const arrayLinksOfDirectory = validateMarkdownsDirectory(pathValidated);
 
-      linksOfArchivesMarkdown(arrayLinksOfDirectory);
+      const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfDirectory);
+
+      validateLinksStatus(arrayLinksOfMarkdown);
     }
 
     if (validateArchive(pathValidated)) {
       const arrayLinksOfArchive = validateMarkdownsArchive(pathValidated);
 
-      linksOfArchivesMarkdown(arrayLinksOfArchive);
+      const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfArchive);
+
+      validateLinksStatus(arrayLinksOfMarkdown);
     }
   }
 
@@ -132,7 +148,7 @@ const mdLinks = (newPath) => {
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown/Readme.md');
+mdLinks('/home/administrador/Escritorio/Markdown/README.md');
 
 
 module.exports = {
@@ -141,6 +157,8 @@ module.exports = {
   validateArchive,
   validateDirectory,
   validateTypeArchive,
+  validateMarkdownsArchive,
+  validateMarkdownsDirectory,
 };
 
 
@@ -160,5 +178,4 @@ Debo probar fetch en cada link.
 /*
 // process.cwd -> Para poner directorio actual de la carpeta respecto a rutas
 // comando pwd
-
 */

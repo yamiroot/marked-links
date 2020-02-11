@@ -3,6 +3,7 @@ const fs = require('fs');
 
 const {
   pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory, validateTypeArchive,
+  validateMarkdownsArchive, validateMarkdownsDirectory,
 } = require('../src/index.js');
 
 
@@ -12,8 +13,8 @@ describe('Valido el tipo de ruta recibido.', () => {
   });
 
   it('Debería detectar si la ruta recibida es absoluta.', () => {
-    const newPath = '/md/newruta.js';
-    expect(path.isAbsolute(pathIsAbsolute(newPath))).toBe(true);
+    const newPath = '/home/administrador/Escritorio/HTML/0-doctype.html';
+    expect(pathIsAbsolute(newPath)).toBe(newPath);
   });
 
   it('Debería ser una función: pathConvertAbsolute.', () => {
@@ -23,7 +24,7 @@ describe('Valido el tipo de ruta recibido.', () => {
   it('Debería convertir a absoluta, si la ruta recibida es relativa.', () => {
     const newPath = 'Markdown';
     if (pathIsAbsolute(newPath) === false) {
-      expect(pathConvertAbsolute(newPath)).toBe(true);
+      expect(pathIsAbsolute(newPath)).toBe(pathConvertAbsolute(newPath));
     }
   });
 });
@@ -68,6 +69,48 @@ describe('Valido el tipo de archivo recibido.', () => {
     expect(validateTypeArchive(newPath)).toBe('.html');
   });
 });
+
+
+describe('Valido si el archivo recibido es markdown.', () => {
+  it('Debería ser una función.', () => {
+    expect(typeof validateMarkdownsArchive).toBe('function');
+  });
+
+  it('La función debería retornar un array con el markdown encontrado.', () => {
+    const newPath = '/home/administrador/Escritorio/Markdown/README.md';
+    const arrayArchivesMarkdown = ['/home/administrador/Escritorio/Markdown/README.md'];
+
+    if (validateTypeArchive(newPath) === '.md') {
+      expect(validateMarkdownsArchive(newPath)).toStrictEqual(arrayArchivesMarkdown);
+    }
+  });
+});
+
+
+describe('Valido si el directorio recibido contiene archivos markdown.', () => {
+  it('Debería ser una función.', () => {
+    expect(typeof validateMarkdownsDirectory).toBe('function');
+  });
+
+  it('Debería leer el directorio y devolver un array de archivos/directorios encontrados.', () => {
+    const newPath = '/home/administrador/Escritorio/Markdown';
+    const arrayPaths = [
+      '/home/administrador/Escritorio/Markdown/README.md',
+      '/home/administrador/Escritorio/Markdown/Readme.md',
+      '/home/administrador/Escritorio/Markdown/TestMarkdown/readme.md',
+    ];
+
+    if (validateDirectory(newPath)) {
+      expect(validateMarkdownsDirectory(newPath)).toStrictEqual(arrayPaths);
+    }
+  });
+});
+
+
+describe('', () => {
+  
+});
+
 
 /* it('La ruta debería ser un String.', () => {
         const root = 'newruta';
