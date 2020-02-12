@@ -112,28 +112,43 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
 
 
 const validateLinksStatus = (arrayLinksArchive) => {
+  const arrayLinksInformation = [];
+
   arrayLinksArchive.forEach((link) => {
+    const linkEvaluated = link;
     const fetchPromise = fetch(link.href);
 
     fetchPromise
       .then((response) => {
-        link.status = response.status;
-        // link.push(response.status);
+        if (response.status >= 200 && response.status < 400) {
+          linkEvaluated.status = response.status;
+          linkEvaluated.statusText = 'ok';
 
-        // Object.defineProperty(link, 'status', { value: response.status });
-        console.log(link, ' ', link.status);
+          arrayLinksInformation.push(linkEvaluated);
+        }
+
+        if (response.status >= 400 || response.status < 200) {
+          linkEvaluated.status = response.status;
+          linkEvaluated.statusText = 'fail';
+
+          arrayLinksInformation.push(linkEvaluated);
+        }
+
+        console.log('Retorno then: ', arrayLinksInformation);
+
+        return arrayLinksInformation;
       })
+      .then()
       .catch((err) => {
         console.log(err);
       });
-
-    // console.log(link.href);
-
-    // console.log(fetchPromise);
   });
+
+  return null;
 };
 
-validateLinksStatus([{
+
+console.log(validateLinksStatus([{
   href:
   'https://dzone.com/articles/how-single-page-web-applications-actually-work',
   text: 'SPA',
@@ -150,8 +165,52 @@ validateLinksStatus([{
   'https://darwindicom/mobile-fir-responsive-web-design/',
   text: 'mobile first',
   file: '/home/administrador/Escritorio/Markdown/Readme.md',
-}]);
+}]));
 
+/*
+fetchPromise
+      .then((response) => {
+        // link.status = response.status;
+        // link.push(response.status);
+
+        const arrayLinksInformation = [];
+
+        if (response.status >= 200 && response.status < 400) {
+        Object.defineProperties(link, {
+            status: { value: response.status, writable: false },
+            statusText: { value: 'ok', writable: false },
+          });
+          console.log(link.statusText, ' ', link.status);
+          console.log(link);
+
+         arrayLinksInformation.push({
+          href: link.href,
+          text: link.text,
+          file: link.file,
+          status: response.status,
+          statusText: 'ok',
+        });
+      }
+
+      if (response.status >= 400 && response.status < 200) {
+        /* Object.defineProperties(link, {
+          status: { value: response.status, writable: false },
+          statusText: { value: 'fail', writable: false },
+        }); 
+
+        arrayLinksInformation.push({
+          href: link.href,
+          text: link.text,
+          file: link.file,
+          status: response.status,
+          statusText: 'fail',
+        });
+
+        // console.log(link.statusText, ' ', link.status);
+        console.log(arrayLinksInformation);
+      }
+    })
+*/
 
 const mdLinks = (newPath) => {
   if ((typeof newPath) === 'string') {
