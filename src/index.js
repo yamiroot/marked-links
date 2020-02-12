@@ -104,51 +104,50 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
     });
   });
 
-  /*   console.log(arrayLinksArchive);
-  console.log(arrayLinksArchive.length); */
-
   return arrayLinksArchive;
 };
 
 
 const validateLinksStatus = (arrayLinksArchive) => {
   const arrayLinksInformation = [];
+  const arrayPromises = [];
 
   arrayLinksArchive.forEach((link) => {
     const linkEvaluated = link;
     const fetchPromise = fetch(link.href);
 
-    fetchPromise
+    arrayPromises.push(fetchPromise
       .then((response) => {
-        if (response.status >= 200 && response.status < 400) {
+        if ((response.status >= 200 && response.status < 400) || response.status === 403) {
           linkEvaluated.status = response.status;
           linkEvaluated.statusText = 'ok';
 
-          arrayLinksInformation.push(linkEvaluated);
+          // arrayLinksInformation.push(linkEvaluated);
+          console.log(linkEvaluated);
+          return linkEvaluated;
         }
 
-        if (response.status >= 400 || response.status < 200) {
+        if ((response.status >= 400 || response.status < 200) && response.status !== 403) {
           linkEvaluated.status = response.status;
           linkEvaluated.statusText = 'fail';
 
-          arrayLinksInformation.push(linkEvaluated);
+          // arrayLinksInformation.push(linkEvaluated);
+          console.log(linkEvaluated);
+          return linkEvaluated;
         }
 
         console.log('Retorno then: ', arrayLinksInformation);
-
-        return arrayLinksInformation;
       })
-      .then()
       .catch((err) => {
         console.log(err);
-      });
+      }));
   });
 
-  return null;
+  return Promise.all(arrayPromises);
 };
 
 
-console.log(validateLinksStatus([{
+/* console.log(validateLinksStatus([{
   href:
   'https://dzone.com/articles/how-single-page-web-applications-actually-work',
   text: 'SPA',
@@ -166,7 +165,7 @@ console.log(validateLinksStatus([{
   text: 'mobile first',
   file: '/home/administrador/Escritorio/Markdown/Readme.md',
 }]));
-
+*/
 /*
 fetchPromise
       .then((response) => {
@@ -196,7 +195,7 @@ fetchPromise
         /* Object.defineProperties(link, {
           status: { value: response.status, writable: false },
           statusText: { value: 'fail', writable: false },
-        }); 
+        });
 
         arrayLinksInformation.push({
           href: link.href,
@@ -212,7 +211,7 @@ fetchPromise
     })
 */
 
-const mdLinks = (newPath) => {
+const mdLinks = (newPath, opts) => {
   if ((typeof newPath) === 'string') {
     const pathValidated = pathIsAbsolute(newPath);
 
@@ -221,7 +220,15 @@ const mdLinks = (newPath) => {
 
       const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfDirectory);
 
-      validateLinksStatus(arrayLinksOfMarkdown);
+      if (opts.validate) {
+        validateLinksStatus(arrayLinksOfMarkdown)
+          .then((response) => {
+            console.log(response);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
+      }
     }
 
     if (validateArchive(pathValidated)) {
@@ -229,7 +236,9 @@ const mdLinks = (newPath) => {
 
       const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfArchive);
 
-      validateLinksStatus(arrayLinksOfMarkdown);
+      if (opts.validate) {
+        validateLinksStatus(arrayLinksOfMarkdown);
+      }
     }
   }
 
@@ -237,7 +246,7 @@ const mdLinks = (newPath) => {
 };
 
 
-// mdLinks('/home/administrador/Escritorio/Markdown');
+mdLinks('/home/administrador/Escritorio/Markdown', { validate: true });
 
 
 module.exports = {
@@ -250,14 +259,6 @@ module.exports = {
   validateMarkdownsDirectory,
   linksOfArchivesMarkdown,
 };
-
-
-/*
-Pendiente hoy:
-fetch debe estar en otra función.
-Pruebo fetch, y fetch recibe una url. Esta url esta en el objeto de links gg.
-Debo probar fetch en cada link.
-*/
 
 // 200 - 359 - ok;
 
