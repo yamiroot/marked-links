@@ -70,13 +70,11 @@ const validateMarkdownsDirectory = (newPath) => {
       arrayOfLinksMarkdown = arrayOfLinksMarkdown.concat(array);
     }
 
-    if (validateArchive(pathName)) {
-      const arrayArchivesMarkdown = validateMarkdownsArchive(pathName);
+    const arrayArchivesMarkdown = validateMarkdownsArchive(pathName);
 
-      arrayArchivesMarkdown.forEach((markdown) => {
-        arrayOfLinksMarkdown.push(markdown);
-      });
-    }
+    arrayArchivesMarkdown.forEach((markdown) => {
+      arrayOfLinksMarkdown.push(markdown);
+    });
   });
 
   return arrayOfLinksMarkdown;
@@ -163,12 +161,11 @@ const validateLinksStatus = (arrayLinksArchive) => {
 
 
 const mdLinks = (newPath, opts) => {
-  if ((typeof newPath) === 'string') {
-    const pathValidated = pathIsAbsolute(newPath);
+  const pathValidated = pathIsAbsolute(newPath);
 
-    const arrayLinksOfDirectory = validateMarkdownsDirectory(pathValidated);
-
-    const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfDirectory);
+  if (validateArchive(pathValidated)) {
+    const arrayArchivesMarkdown = validateMarkdownsArchive(pathValidated);
+    const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
 
     if (opts.validate) {
       return validateLinksStatus(arrayLinksOfMarkdown);
@@ -176,10 +173,19 @@ const mdLinks = (newPath, opts) => {
 
     return arrayLinksOfMarkdown;
   }
+
+  const arrayArchivesMarkdown = validateMarkdownsDirectory(pathValidated);
+  const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
+
+  if (opts.validate) {
+    return validateLinksStatus(arrayLinksOfMarkdown);
+  }
+
+  return arrayLinksOfMarkdown;
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown/TestMarkdown', { validate: true })
+mdLinks('/home/administrador/Escritorio/Markdown', { validate: true })
   .then((response) => {
     console.log(response);
   })
@@ -204,3 +210,5 @@ module.exports = {
 // process.cwd -> Para poner directorio actual de la carpeta respecto a rutas
 // comando pwd
 */
+
+// Averiguar Promise.resolve()
