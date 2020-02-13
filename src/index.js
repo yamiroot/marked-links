@@ -118,25 +118,23 @@ const validateLinksStatus = (arrayLinksArchive) => {
 
     arrayPromises.push(fetchPromise
       .then((response) => {
-        if ((response.status >= 200 && response.status < 400) || response.status === 403) {
+        if (response.status >= 200 && response.status < 400) {
           linkEvaluated.status = response.status;
           linkEvaluated.statusText = 'ok';
 
           // arrayLinksInformation.push(linkEvaluated);
-          console.log(linkEvaluated);
+          // console.log(linkEvaluated);
           return linkEvaluated;
         }
+        linkEvaluated.status = response.status;
+        linkEvaluated.statusText = 'fail';
 
-        if ((response.status >= 400 || response.status < 200) && response.status !== 403) {
-          linkEvaluated.status = response.status;
-          linkEvaluated.statusText = 'fail';
+        // arrayLinksInformation.push(linkEvaluated);
+        // console.log(linkEvaluated);
+        return linkEvaluated;
 
-          // arrayLinksInformation.push(linkEvaluated);
-          console.log(linkEvaluated);
-          return linkEvaluated;
-        }
 
-        console.log('Retorno then: ', arrayLinksInformation);
+        // console.log('Retorno then: ', arrayLinksInformation);
       })
       .catch((err) => {
         console.log(err);
@@ -211,6 +209,7 @@ fetchPromise
     })
 */
 
+
 const mdLinks = (newPath, opts) => {
   if ((typeof newPath) === 'string') {
     const pathValidated = pathIsAbsolute(newPath);
@@ -221,13 +220,7 @@ const mdLinks = (newPath, opts) => {
       const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfDirectory);
 
       if (opts.validate) {
-        validateLinksStatus(arrayLinksOfMarkdown)
-          .then((response) => {
-            console.log(response);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
+        return validateLinksStatus(arrayLinksOfMarkdown);
       }
     }
 
@@ -237,16 +230,26 @@ const mdLinks = (newPath, opts) => {
       const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfArchive);
 
       if (opts.validate) {
-        validateLinksStatus(arrayLinksOfMarkdown);
+        validateLinksStatus(arrayLinksOfMarkdown)
+          .then((response) => {
+            console.log('mi response: ', response);
+          })
+          .catch((err) => {
+            console.log(err);
+          });
       }
     }
   }
-
-  return null;
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown', { validate: true });
+mdLinks('/home/administrador/Escritorio/Markdown/TestMarkdown', { validate: true })
+  .then((response) => {
+    console.log(response);
+  })
+  .catch((err) => {
+    console.log(err);
+  });
 
 
 module.exports = {
