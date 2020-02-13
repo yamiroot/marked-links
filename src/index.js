@@ -1,8 +1,7 @@
 // Librerías node.js
 const path = require('path');
 const fs = require('fs');
-
-// Librerías de Nodejs
+// Librerías de Js
 const marked = require('marked');
 const jsdom = require('jsdom');
 const fetch = require('node-fetch');
@@ -109,7 +108,6 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
 
 
 const validateLinksStatus = (arrayLinksArchive) => {
-  const arrayLinksInformation = [];
   const arrayPromises = [];
 
   arrayLinksArchive.forEach((link) => {
@@ -122,22 +120,20 @@ const validateLinksStatus = (arrayLinksArchive) => {
           linkEvaluated.status = response.status;
           linkEvaluated.statusText = 'ok';
 
-          // arrayLinksInformation.push(linkEvaluated);
-          // console.log(linkEvaluated);
           return linkEvaluated;
         }
+
         linkEvaluated.status = response.status;
         linkEvaluated.statusText = 'fail';
 
-        // arrayLinksInformation.push(linkEvaluated);
-        // console.log(linkEvaluated);
         return linkEvaluated;
-
-
-        // console.log('Retorno then: ', arrayLinksInformation);
       })
       .catch((err) => {
         console.log(err);
+        linkEvaluated.status = 'ocurrió un error';
+        linkEvaluated.statusText = 'fail';
+
+        return linkEvaluated;
       }));
   });
 
@@ -164,81 +160,21 @@ const validateLinksStatus = (arrayLinksArchive) => {
   file: '/home/administrador/Escritorio/Markdown/Readme.md',
 }]));
 */
-/*
-fetchPromise
-      .then((response) => {
-        // link.status = response.status;
-        // link.push(response.status);
-
-        const arrayLinksInformation = [];
-
-        if (response.status >= 200 && response.status < 400) {
-        Object.defineProperties(link, {
-            status: { value: response.status, writable: false },
-            statusText: { value: 'ok', writable: false },
-          });
-          console.log(link.statusText, ' ', link.status);
-          console.log(link);
-
-         arrayLinksInformation.push({
-          href: link.href,
-          text: link.text,
-          file: link.file,
-          status: response.status,
-          statusText: 'ok',
-        });
-      }
-
-      if (response.status >= 400 && response.status < 200) {
-        /* Object.defineProperties(link, {
-          status: { value: response.status, writable: false },
-          statusText: { value: 'fail', writable: false },
-        });
-
-        arrayLinksInformation.push({
-          href: link.href,
-          text: link.text,
-          file: link.file,
-          status: response.status,
-          statusText: 'fail',
-        });
-
-        // console.log(link.statusText, ' ', link.status);
-        console.log(arrayLinksInformation);
-      }
-    })
-*/
 
 
 const mdLinks = (newPath, opts) => {
   if ((typeof newPath) === 'string') {
     const pathValidated = pathIsAbsolute(newPath);
 
-    if (validateDirectory(pathValidated)) {
-      const arrayLinksOfDirectory = validateMarkdownsDirectory(pathValidated);
+    const arrayLinksOfDirectory = validateMarkdownsDirectory(pathValidated);
 
-      const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfDirectory);
+    const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfDirectory);
 
-      if (opts.validate) {
-        return validateLinksStatus(arrayLinksOfMarkdown);
-      }
+    if (opts.validate) {
+      return validateLinksStatus(arrayLinksOfMarkdown);
     }
 
-    if (validateArchive(pathValidated)) {
-      const arrayLinksOfArchive = validateMarkdownsArchive(pathValidated);
-
-      const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayLinksOfArchive);
-
-      if (opts.validate) {
-        validateLinksStatus(arrayLinksOfMarkdown)
-          .then((response) => {
-            console.log('mi response: ', response);
-          })
-          .catch((err) => {
-            console.log(err);
-          });
-      }
-    }
+    return arrayLinksOfMarkdown;
   }
 };
 
@@ -262,11 +198,6 @@ module.exports = {
   validateMarkdownsDirectory,
   linksOfArchivesMarkdown,
 };
-
-// 200 - 359 - ok;
-
-// status: numero
-// ok: ok / fail
 
 
 /*
