@@ -14,7 +14,7 @@ const mdLinks = (newPath, opts) => {
       return validateLinksStatus(arrayLinksOfMarkdown);
     }
 
-    return arrayLinksOfMarkdown;
+    return Promise.resolve(arrayLinksOfMarkdown);
   }
 
   const arrayArchivesMarkdown = validateMarkdownsDirectory(pathValidated);
@@ -24,11 +24,11 @@ const mdLinks = (newPath, opts) => {
     return validateLinksStatus(arrayLinksOfMarkdown);
   }
 
-  return arrayLinksOfMarkdown;
+  return Promise.resolve(arrayLinksOfMarkdown);
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown', { validate: true })
+mdLinks('/home/administrador/Escritorio/Markdown/Readme.md', { validate: true })
   .then((response) => {
     console.log(response);
   })

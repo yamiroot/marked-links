@@ -4,7 +4,7 @@
 const {
   pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory, validateTypeArchive,
   validateMarkdownsArchive, validateMarkdownsDirectory, linksOfArchivesMarkdown,
-} = require('../src/index.js');
+} = require('../src/main.js');
 
 
 describe('Valido el tipo de ruta recibido.', () => {
@@ -78,9 +78,7 @@ describe('Valido si el archivo recibido es markdown.', () => {
     const newPath = '/home/administrador/Escritorio/Markdown/README.md';
     const arrayArchivesMarkdown = ['/home/administrador/Escritorio/Markdown/README.md'];
 
-    if (validateTypeArchive(newPath) === '.md') {
-      expect(validateMarkdownsArchive(newPath)).toStrictEqual(arrayArchivesMarkdown);
-    }
+    expect(validateMarkdownsArchive(newPath)).toStrictEqual(arrayArchivesMarkdown);
   });
 });
 
@@ -97,9 +95,7 @@ describe('Valido si el directorio recibido contiene archivos markdown.', () => {
       '/home/administrador/Escritorio/Markdown/TestMarkdown/readme.md',
     ];
 
-    if (validateDirectory(newPath)) {
-      expect(validateMarkdownsDirectory(newPath)).toStrictEqual(arrayPaths);
-    }
+    expect(validateMarkdownsDirectory(newPath)).toStrictEqual(arrayPaths);
   });
 });
 
@@ -143,6 +139,13 @@ describe('Valido la información de los links en cada archivo markdown.', () => 
     }];
 
     expect(linksOfArchivesMarkdown(arrayPaths)).toStrictEqual(informationLinks);
+  });
+});
+
+
+describe('', () => {
+  it('', () => {
+    
   });
 });
 

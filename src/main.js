@@ -139,27 +139,6 @@ const validateLinksStatus = (arrayLinksArchive) => {
 };
 
 
-/* console.log(validateLinksStatus([{
-  href:
-  'https://dzone.com/articles/how-single-page-web-applications-actually-work',
-  text: 'SPA',
-  file: '/home/administrador/Escritorio/Markdown/Readme.md',
-},
-{
-  href:
-  'https://darwindigital.com/mobile-fir-responsive-web-design/',
-  text: 'mobile first',
-  file: '/home/administrador/Escritorio/Markdown/Readme.md',
-},
-{
-  href:
-  'https://darwindicom/mobile-fir-responsive-web-design/',
-  text: 'mobile first',
-  file: '/home/administrador/Escritorio/Markdown/Readme.md',
-}]));
-*/
-
-
 module.exports = {
   pathConvertAbsolute,
   pathIsAbsolute,
