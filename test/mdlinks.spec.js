@@ -1,9 +1,7 @@
-// const path = require('path');
-// const fs = require('fs');
-
 const {
-  pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory, validateTypeArchive,
-  validateMarkdownsArchive, validateMarkdownsDirectory, linksOfArchivesMarkdown,
+  pathConvertAbsolute, pathIsAbsolute, validateArchive, validateDirectory,
+  validateTypeArchive, validateMarkdownsArchive, validateMarkdownsDirectory,
+  linksOfArchivesMarkdown, validateLinksStatus,
 } = require('../src/main.js');
 
 
@@ -100,7 +98,7 @@ describe('Valido si el directorio recibido contiene archivos markdown.', () => {
 });
 
 
-describe('Valido la información de los links en cada archivo markdown.', () => {
+describe('Obtengo la información de los links en cada archivo markdown.', () => {
   it('Debería ser una función.', () => {
     expect(typeof linksOfArchivesMarkdown).toBe('function');
   });
@@ -143,14 +141,68 @@ describe('Valido la información de los links en cada archivo markdown.', () => 
 });
 
 
-describe('', () => {
-  it('', () => {
-    
+describe('Valido el estado de los links en cada archivo markdown.', () => {
+  const linkCorrect = [{
+    href:
+    'https://dzone.com/articles/how-single-page-web-applications-actually-work',
+    text: 'SPA',
+    file: '/home/administrador/Escritorio/Markdown/Readme.md',
+  }];
+
+
+  const linkIncorrect = [{
+    href:
+    'https://dzone.com/articlpplications-actually-work',
+    text: 'SPA',
+    file: '/home/administrador/Escritorio/Markdown/Readme.md',
+  }];
+
+  const linkError = [{
+    href:
+    '//dzone.com/articlpplications-actually-work',
+  }];
+
+  it('Debería ser una función.', () => {
+    expect(typeof validateLinksStatus).toBe('function');
   });
+
+  it('Debería devolver un array de un objeto, cuyas propiedades son: href, text, file, status: "200", statusText: "ok".', (done) => validateLinksStatus(linkCorrect).then((response) => {
+    const linkCorrectStatus = [{
+      href:
+      'https://dzone.com/articles/how-single-page-web-applications-actually-work',
+      text: 'SPA',
+      file: '/home/administrador/Escritorio/Markdown/Readme.md',
+      status: 200,
+      statusText: 'ok',
+    }];
+
+    expect(response).toStrictEqual(linkCorrectStatus);
+
+    done();
+  }));
+
+  it('Debería devolver un array de un objeto, cuyas propiedades son: href, text, file, status: "404", statusText: "fail".', (done) => validateLinksStatus(linkIncorrect).then((response) => {
+    const linkIncorrectStatus = [{
+      href:
+      'https://dzone.com/articlpplications-actually-work',
+      text: 'SPA',
+      file: '/home/administrador/Escritorio/Markdown/Readme.md',
+      status: 404,
+      statusText: 'fail',
+    }];
+
+    expect(response).toStrictEqual(linkIncorrectStatus);
+
+    done();
+  }));
+
+  it('Debería devolver un array de un objeto, cuya propiedad status tiene el valor "ocurrió un error.".', (done) => validateLinksStatus(linkError).then((response) => {
+    const linkErrorStatus = [{
+      status: 'ocurrió un error',
+      statusText: 'fail',
+    }];
+
+    expect(response.status).toBe(linkErrorStatus.status);
+    done();
+  }));
 });
-
-
-/* it('La ruta debería ser un String.', () => {
-        const root = 'newruta';
-        expect(path.isAbsolute()).toBe('String');
-    }); */

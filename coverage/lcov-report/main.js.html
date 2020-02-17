@@ -23,30 +23,30 @@
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">73.85% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>48/65</span>
+                <span class='fraction'>65/65</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">60% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/10</span>
+                <span class='fraction'>10/10</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">75% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>12/16</span>
+                <span class='fraction'>16/16</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">72.13% </span>
+                <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>44/61</span>
+                <span class='fraction'>61/61</span>
             </div>
         
             
@@ -55,7 +55,7 @@
             Press <em>n</em> or <em>j</em> to go to the next uncovered block, <em>b</em>, <em>p</em> or <em>k</em> for the previous block.
         </p>
     </div>
-    <div class='status-line medium'></div>
+    <div class='status-line high'></div>
     <pre><table class="coverage">
 <tr><td class="line-count quiet"><a name='L1'></a><a href='#L1'>1</a>
 <a name='L2'></a><a href='#L2'>2</a>
@@ -324,36 +324,36 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-no">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -482,37 +482,37 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) =&gt; {
 };
 &nbsp;
 &nbsp;
-const validateLinksStatus = <span class="fstat-no" title="function not covered" >(a</span>rrayLinksArchive) =&gt; {
-  const arrayPromises = <span class="cstat-no" title="statement not covered" >[];</span>
+const validateLinksStatus = (arrayLinksArchive) =&gt; {
+  const arrayPromises = [];
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  arrayLinksArchive.forEach(<span class="fstat-no" title="function not covered" >(l</span>ink) =&gt; {</span>
-    const linkEvaluated = <span class="cstat-no" title="statement not covered" >link;</span>
-    const fetchPromise = <span class="cstat-no" title="statement not covered" >fetch(link.href);</span>
+  arrayLinksArchive.forEach((link) =&gt; {
+    const linkEvaluated = link;
+    const fetchPromise = fetch(link.href);
 &nbsp;
-<span class="cstat-no" title="statement not covered" >    arrayPromises.push(fetchPromise</span>
-      .then(<span class="fstat-no" title="function not covered" >(r</span>esponse) =&gt; {
-<span class="cstat-no" title="statement not covered" >        if (response.status &gt;= 200 &amp;&amp; response.status &lt; 400) {</span>
-<span class="cstat-no" title="statement not covered" >          linkEvaluated.status = response.status;</span>
-<span class="cstat-no" title="statement not covered" >          linkEvaluated.statusText = 'ok';</span>
+    arrayPromises.push(fetchPromise
+      .then((response) =&gt; {
+        if (response.status &gt;= 200 &amp;&amp; response.status &lt; 400) {
+          linkEvaluated.status = response.status;
+          linkEvaluated.statusText = 'ok';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >          return linkEvaluated;</span>
+          return linkEvaluated;
         }
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        linkEvaluated.status = response.status;</span>
-<span class="cstat-no" title="statement not covered" >        linkEvaluated.statusText = 'fail';</span>
+        linkEvaluated.status = response.status;
+        linkEvaluated.statusText = 'fail';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return linkEvaluated;</span>
+        return linkEvaluated;
       })
-      .catch(<span class="fstat-no" title="function not covered" >(e</span>rr) =&gt; {
-<span class="cstat-no" title="statement not covered" >        console.log(err);</span>
-<span class="cstat-no" title="statement not covered" >        linkEvaluated.status = 'ocurrió un error';</span>
-<span class="cstat-no" title="statement not covered" >        linkEvaluated.statusText = 'fail';</span>
+      .catch((err) =&gt; {
+        console.log(err);
+        linkEvaluated.status = 'ocurrió un error';
+        linkEvaluated.statusText = 'fail';
 &nbsp;
-<span class="cstat-no" title="statement not covered" >        return linkEvaluated;</span>
+        return linkEvaluated;
       }));
   });
 &nbsp;
-<span class="cstat-no" title="statement not covered" >  return Promise.all(arrayPromises);</span>
+  return Promise.all(arrayPromises);
 };
 &nbsp;
 &nbsp;
@@ -541,7 +541,7 @@ module.exports = {
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Sun Feb 16 2020 17:13:36 GMT-0500 (GMT-05:00)
+                at Mon Feb 17 2020 17:06:29 GMT-0500 (GMT-05:00)
             </div>
         </div>
         <script src="prettify.js"></script>
