@@ -1,3 +1,5 @@
+const path = require('path');
+
 const {
   pathIsAbsolute, validateArchive, validateMarkdownsArchive, validateMarkdownsDirectory,
   linksOfArchivesMarkdown, validateLinksStatus,
@@ -28,10 +30,13 @@ const mdLinks = (newPath, opts) => {
 };
 
 
-mdLinks('/home/administrador/Escritorio/Markdown/Readme.md', { validate: true })
+mdLinks(path.join(process.cwd(), 'MarkdownForTests', 'TestMarkdown'), { validate: true })
   .then((response) => {
     console.log(response);
   })
   .catch((err) => {
     console.log(err);
   });
+
+
+module.exports = { mdLinks };

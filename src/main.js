@@ -150,10 +150,3 @@ module.exports = {
   linksOfArchivesMarkdown,
   validateLinksStatus,
 };
-
-/*
-// process.cwd -> Para poner directorio actual de la carpeta respecto a rutas
-// comando pwd
-*/
-
-// Averiguar Promise.resolve()
