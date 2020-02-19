@@ -1,4 +1,3 @@
-const path = require('path');
 
 const {
   pathIsAbsolute, validateArchive, validateMarkdownsArchive, validateMarkdownsDirectory,
@@ -30,13 +29,13 @@ const mdLinks = (newPath, opts) => {
 };
 
 
-mdLinks(path.join(process.cwd(), 'MarkdownForTests', 'TestMarkdown'), { validate: true })
+/* mdLinks(path.join(process.cwd(), 'MarkdownForTests', 'TestMarkdown'), { validate: true })
   .then((response) => {
     console.log(response);
   })
   .catch((err) => {
     console.log(err);
   });
-
+*/
 
 module.exports = { mdLinks };

@@ -308,4 +308,10 @@ describe('Valido la información y los estados de los links en los archivos Mark
       expect(response).toStrictEqual(informationLinksStatusDirectory);
       done();
     }));
+
+  it('Si es un archivo y validate es "false", debería retornar un array de objetos con las propiedades: href, text y file.',
+    (done) => mdLinks(path.join(process.cwd(), 'MarkdownForTests', 'Readme.md'), { validate: false }).then((response) => {
+      expect(response).toStrictEqual(informationLinkArchive);
+      done();
+    }));
 });

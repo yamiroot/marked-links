@@ -33,6 +33,9 @@
   ],
   "author": "buscoanemo",
   "license": "ISC",
+  "bin": {
+    "md-links": "./cli.js"
+  },
   "bugs": {
     "url": "https://github.com/YamiQuispe/LIM011-fe-md-links/issues"
   },
