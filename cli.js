@@ -9,6 +9,10 @@ const [,, ...args] = process.argv;
 const cli = (array) => {
   // array[0]: Ruta.
 
+  if (array.length === 0) {
+    return Promise.resolve('Por favor, ingrese una ruta.');
+  }
+
   if (array.length > 3) {
     return Promise.resolve('Ha excedido el número de comandos permitidos.');
   }
