@@ -28,14 +28,4 @@ const mdLinks = (newPath, opts) => {
   return Promise.resolve(arrayLinksOfMarkdown);
 };
 
-
-/* mdLinks(path.join(process.cwd(), 'MarkdownForTests', 'TestMarkdown'), { validate: true })
-  .then((response) => {
-    console.log(response);
-  })
-  .catch((err) => {
-    console.log(err);
-  });
-*/
-
 module.exports = { mdLinks };
