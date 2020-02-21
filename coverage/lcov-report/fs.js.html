@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for index.js</title>
+    <title>Code coverage report for fs.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,34 +19,34 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> index.js</h1>
+        <h1><a href="index.html">All files</a> fs.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">84.62% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>11/13</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">0% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>0/2</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Functions</span>
-                <span class='fraction'>1/1</span>
+                <span class='fraction'>3/3</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
-                <span class="strong">100% </span>
+                <span class="strong">81.82% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>9/11</span>
             </div>
         
             
@@ -86,79 +86,64 @@
 <a name='L27'></a><a href='#L27'>27</a>
 <a name='L28'></a><a href='#L28'>28</a>
 <a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L30'></a><a href='#L30'>30</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">2x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">5x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">5x</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">3x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">3x</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-no">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const myFunctions = require('../src/main.js');
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const fs = require('fs');
 &nbsp;
-const {
-  validateMarkdownsDirectory, validateArchive,
-  linksOfArchivesMarkdown, validateLinksStatus, validateMarkdownsArchive,
-} = myFunctions;
+const { validateTypeArchive } = require('./path.js');
 &nbsp;
 &nbsp;
-const mdLinks = (newPath, opts) =&gt; {
-  const pathValidated = myFunctions.pathIsAbsolute(newPath);
+// fs.stats.isFile(): Devuelve un booleano.
+const validateArchive = (newPath) =&gt; fs.statSync(newPath).isFile();
+// console.log(validateArchive('src/index.js'));
 &nbsp;
-  if (validateArchive(pathValidated)) {
-    const arrayArchivesMarkdown = validateMarkdownsArchive(pathValidated);
-    const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
 &nbsp;
-    if (opts.validate) {
-      return validateLinksStatus(arrayLinksOfMarkdown);
-    }
+// fs.stats.isDirectory(): Devuelve un booleano
+const validateDirectory = (newPath) =&gt; fs.statSync(newPath).isDirectory();
+// console.log(validateDirectory('src'));
 &nbsp;
-    return Promise.resolve(arrayLinksOfMarkdown);
+&nbsp;
+const validateMarkdownsArchive = (newPath) =&gt; {
+  const arrayOfLinksMarkdown = [];
+&nbsp;
+  console.log('typeof: ', typeof validateTypeArchive);
+&nbsp;
+  if (validateTypeArchive(newPath) === '.md') {
+<span class="cstat-no" title="statement not covered" >    arrayOfLinksMarkdown.push(newPath);</span>
   }
 &nbsp;
-  const arrayArchivesMarkdown = validateMarkdownsDirectory(pathValidated);
-  const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
-&nbsp;
-  if (opts.validate) {
-    return validateLinksStatus(arrayLinksOfMarkdown);
-  }
-&nbsp;
-  return Promise.resolve(arrayLinksOfMarkdown);
+<span class="cstat-no" title="statement not covered" >  return arrayOfLinksMarkdown;</span>
 };
 &nbsp;
 &nbsp;
-module.exports = { mdLinks };
+module.exports = { validateArchive, validateDirectory, validateMarkdownsArchive };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->
@@ -166,7 +151,7 @@ module.exports = { mdLinks };
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank">istanbul</a>
-                at Fri Feb 21 2020 16:43:49 GMT-0500 (GMT-05:00)
+                at Fri Feb 21 2020 10:40:14 GMT-0500 (GMT-05:00)
             </div>
         </div>
         <script src="prettify.js"></script>

@@ -1,5 +1,7 @@
 #!/usr/bin/env node
 
+/* eslint-disable no-console */
+
 // process.argv: Es una matriz que contiene los argumentos de la línea de comandos.
 // args: Parámetro.
 const [,, ...args] = process.argv;

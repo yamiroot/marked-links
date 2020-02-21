@@ -1,11 +1,13 @@
+const myFunctions = require('../src/main.js');
 
 const {
-  pathIsAbsolute, validateArchive, validateMarkdownsArchive, validateMarkdownsDirectory,
-  linksOfArchivesMarkdown, validateLinksStatus,
-} = require('../src/main.js');
+  validateMarkdownsDirectory, validateArchive,
+  linksOfArchivesMarkdown, validateLinksStatus, validateMarkdownsArchive,
+} = myFunctions;
+
 
 const mdLinks = (newPath, opts) => {
-  const pathValidated = pathIsAbsolute(newPath);
+  const pathValidated = myFunctions.pathIsAbsolute(newPath);
 
   if (validateArchive(pathValidated)) {
     const arrayArchivesMarkdown = validateMarkdownsArchive(pathValidated);
@@ -27,5 +29,6 @@ const mdLinks = (newPath, opts) => {
 
   return Promise.resolve(arrayLinksOfMarkdown);
 };
+
 
 module.exports = { mdLinks };
