@@ -6,6 +6,6 @@ Object.assign(fetchMock.config, {
 });
 
 fetchMock
-  .mock('*', 404);
+  .mock('*', 200);
 
 module.exports = fetchMock;
