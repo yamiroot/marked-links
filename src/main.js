@@ -126,17 +126,27 @@ const validateLinksStatus = (arrayLinksArchive) => {
 
         return linkEvaluated;
       })
-      .catch((err) => {
-        console.log('acá el error: ', err);
-        linkEvaluated.status = 'ocurrió un error';
-        linkEvaluated.statusText = 'fail';
-
-        return linkEvaluated;
+      .catch(() => {
+        const objetoError = {
+          href: linkEvaluated,
+          status: 'ocurrió un error',
+          statusText: 'fail',
+        };
+        /* console.log('mi link: ', linkEvaluated);
+        console.log('status: ', objetoError.status);
+        console.log('statusText: ', objetoError.statusText); */
+        // console.log(objetoError);
+        return objetoError;
       }));
   });
 
   return Promise.all(arrayPromises);
 };
+
+
+/* validateLinksStatus(['/src/index/sdesde/des.html']).then((response) => {
+  console.log(response);
+}); */
 
 
 module.exports = {

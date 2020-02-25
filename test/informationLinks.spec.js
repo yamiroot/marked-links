@@ -104,22 +104,10 @@ describe('Valido el estado de los links en cada archivo markdown.', () => {
   }));
 
   it('Debería devolver un array de un objeto, cuya propiedad status tiene el valor "ocurrió un error".', () => {
-    const linkErrorStatus = [{
-      status: 'ocurrió un error',
-      statusText: 'fail',
-    }];
-
     try {
       validateLinksStatus(linkError);
     } catch (error) {
-      expect(error).toStrictEqual(typeof new Error());
+      expect(error).toStrictEqual(new TypeError('Invalid URL'));
     }
-
-    // validateLinksStatus(linkError)
-    /* .then((response) => {
-
-      expect(response.status).toBe(linkErrorStatus.status);
-
-      done(); */
   });
 });
