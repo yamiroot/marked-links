@@ -103,14 +103,23 @@ describe('Valido el estado de los links en cada archivo markdown.', () => {
     done();
   }));
 
-  it('Debería devolver un array de un objeto, cuya propiedad status tiene el valor "ocurrió un error".', (done) => validateLinksStatus(linkError).then((response) => {
+  it('Debería devolver un array de un objeto, cuya propiedad status tiene el valor "ocurrió un error".', () => {
     const linkErrorStatus = [{
       status: 'ocurrió un error',
       statusText: 'fail',
     }];
 
-    expect(response.status).toBe(linkErrorStatus.status);
+    try {
+      validateLinksStatus(linkError);
+    } catch (error) {
+      expect(error).toStrictEqual(typeof new Error());
+    }
 
-    done();
-  }));
+    // validateLinksStatus(linkError)
+    /* .then((response) => {
+
+      expect(response.status).toBe(linkErrorStatus.status);
+
+      done(); */
+  });
 });

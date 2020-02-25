@@ -354,3 +354,4 @@ si tienes dudas existenciales con respecto a estas decisiones. No existe una
 - [Pill de recursión - video](https://www.youtube.com/watch?v=lPPgY3HLlhQ&t=916s)
 - [Pill de recursión - repositorio](https://github.com/merunga/pildora-recursion)
 - [Mock Jest](https://jestjs.io/docs/es-ES/manual-mocks)
+- [Destructuring](https://codeburst.io/es6-destructuring-the-complete-guide-7f842d08b98f)

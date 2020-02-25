@@ -127,7 +127,7 @@ const validateLinksStatus = (arrayLinksArchive) => {
         return linkEvaluated;
       })
       .catch((err) => {
-        console.log(err);
+        console.log('acá el error: ', err);
         linkEvaluated.status = 'ocurrió un error';
         linkEvaluated.statusText = 'fail';
 

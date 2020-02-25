@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1582427132617" clover="3.2.0">
-  <project timestamp="1582427132618" name="All files">
-    <metrics statements="77" coveredstatements="70" conditionals="16" coveredconditionals="15" methods="17" coveredmethods="16" elements="110" coveredelements="101" complexity="0" loc="77" ncloc="77" packages="1" files="2" classes="2"/>
+<coverage generated="1582588694900" clover="3.2.0">
+  <project timestamp="1582588694900" name="All files">
+    <metrics statements="77" coveredstatements="73" conditionals="16" coveredconditionals="16" methods="17" coveredmethods="16" elements="110" coveredelements="105" complexity="0" loc="77" ncloc="77" packages="1" files="2" classes="2"/>
     <file name="index.js" path="/home/administrador/Escritorio/JsProject/LIM011-fe-md-links/src/index.js">
       <metrics statements="16" coveredstatements="16" conditionals="6" coveredconditionals="6" methods="1" coveredmethods="1"/>
       <line num="1" count="1" type="stmt"/>
@@ -22,7 +22,7 @@
       <line num="34" count="1" type="stmt"/>
     </file>
     <file name="main.js" path="/home/administrador/Escritorio/JsProject/LIM011-fe-md-links/src/main.js">
-      <metrics statements="61" coveredstatements="54" conditionals="10" coveredconditionals="9" methods="16" coveredmethods="15"/>
+      <metrics statements="61" coveredstatements="57" conditionals="10" coveredconditionals="10" methods="16" coveredmethods="15"/>
       <line num="2" count="4" type="stmt"/>
       <line num="3" count="4" type="stmt"/>
       <line num="5" count="4" type="stmt"/>
@@ -71,13 +71,13 @@
       <line num="112" count="7" type="stmt"/>
       <line num="113" count="7" type="stmt"/>
       <line num="115" count="6" type="stmt"/>
-      <line num="117" count="6" type="cond" truecount="3" falsecount="1"/>
-      <line num="118" count="6" type="stmt"/>
-      <line num="119" count="6" type="stmt"/>
-      <line num="121" count="6" type="stmt"/>
-      <line num="124" count="0" type="stmt"/>
-      <line num="125" count="0" type="stmt"/>
-      <line num="127" count="0" type="stmt"/>
+      <line num="117" count="6" type="cond" truecount="4" falsecount="0"/>
+      <line num="118" count="5" type="stmt"/>
+      <line num="119" count="5" type="stmt"/>
+      <line num="121" count="5" type="stmt"/>
+      <line num="124" count="1" type="stmt"/>
+      <line num="125" count="1" type="stmt"/>
+      <line num="127" count="1" type="stmt"/>
       <line num="130" count="0" type="stmt"/>
       <line num="131" count="0" type="stmt"/>
       <line num="132" count="0" type="stmt"/>
