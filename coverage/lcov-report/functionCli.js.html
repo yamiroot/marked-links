@@ -3,7 +3,7 @@
 <html lang="en">
 
 <head>
-    <title>Code coverage report for index.js</title>
+    <title>Code coverage report for functionCli.js</title>
     <meta charset="utf-8" />
     <link rel="stylesheet" href="prettify.css" />
     <link rel="stylesheet" href="base.css" />
@@ -19,20 +19,20 @@
 <body>
 <div class='wrapper'>
     <div class='pad1'>
-        <h1><a href="index.html">All files</a> index.js</h1>
+        <h1><a href="index.html">All files</a> functionCli.js</h1>
         <div class='clearfix'>
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>18/18</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>16/16</span>
+                <span class='fraction'>14/14</span>
             </div>
         
             
@@ -84,81 +84,60 @@
 <a name='L25'></a><a href='#L25'>25</a>
 <a name='L26'></a><a href='#L26'>26</a>
 <a name='L27'></a><a href='#L27'>27</a>
-<a name='L28'></a><a href='#L28'>28</a>
-<a name='L29'></a><a href='#L29'>29</a>
-<a name='L30'></a><a href='#L30'>30</a>
-<a name='L31'></a><a href='#L31'>31</a>
-<a name='L32'></a><a href='#L32'>32</a>
-<a name='L33'></a><a href='#L33'>33</a>
-<a name='L34'></a><a href='#L34'>34</a>
-<a name='L35'></a><a href='#L35'>35</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">2x</span>
+<a name='L28'></a><a href='#L28'>28</a></td><td class="line-coverage quiet"><span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">13x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-yes">11x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">11x</span>
 <span class="cline-any cline-yes">7x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">6x</span>
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">5x</span>
+<span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-yes">4x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-yes">3x</span>
+<span class="cline-any cline-yes">2x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">1x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">2x</span>
-<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const myFunctions = require('../src/main.js');
-&nbsp;
-const {
-  validateMarkdownsDirectory, validateArchive,
-  linksOfArchivesMarkdown, validateLinksStatus, validateMarkdownsArchive,
-} = myFunctions;
+<span class="cline-any cline-yes">1x</span>
+<span class="cline-any cline-neutral">&nbsp;</span></td><td class="text"><pre class="prettyprint lang-js">const { mdLinks } = require('./index.js');
 &nbsp;
 &nbsp;
-const mdLinks = (newPath, opts) =&gt; {
-  const pathValidated = myFunctions.pathIsAbsolute(newPath);
+const cli = (array) =&gt; {
+  // array[0]: Ruta.
 &nbsp;
-  if (validateArchive(pathValidated)) {
-    const arrayArchivesMarkdown = validateMarkdownsArchive(pathValidated);
-    const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
-&nbsp;
-    if (opts.validate) {
-      return validateLinksStatus(arrayLinksOfMarkdown);
-    }
-&nbsp;
-    return Promise.resolve(arrayLinksOfMarkdown);
+  if (array.length === 0) {
+    return Promise.resolve('Por favor, ingrese una ruta.');
   }
 &nbsp;
-  const arrayArchivesMarkdown = validateMarkdownsDirectory(pathValidated);
-  const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
-&nbsp;
-  if (opts.validate) {
-    return validateLinksStatus(arrayLinksOfMarkdown);
+  if (array.length &gt; 3) {
+    return Promise.resolve('Ha excedido el número de comandos permitidos.');
   }
 &nbsp;
-  return Promise.resolve(arrayLinksOfMarkdown);
+  if (array[1] === '--stats' &amp;&amp; array.length === 2) {
+    return mdLinks(array[0], { validate: false });
+  } if (array[1] === '--validate' &amp;&amp; array.length === 2) {
+    return mdLinks(array[0], { validate: true });
+  } if ((array[1] === '--validate' &amp;&amp; array[2] === '--stats') || (array[1] === '--stats' &amp;&amp; array[2] === '--validate')) {
+    return mdLinks(array[0], { validate: true });
+  }
+&nbsp;
+  return Promise.resolve('El comando ingresado no es válido.');
 };
 &nbsp;
 &nbsp;
-module.exports = { mdLinks };
+module.exports = { cli };
 &nbsp;</pre></td></tr></table></pre>
 
                 <div class='push'></div><!-- for sticky footer -->

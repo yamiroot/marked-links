@@ -1,5 +1,6 @@
 const { mdLinks } = require('./index.js');
 
+
 const cli = (array) => {
   // array[0]: Ruta.
 
