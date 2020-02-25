@@ -132,9 +132,9 @@ const validateLinksStatus = (arrayLinksArchive) => {
           status: 'ocurrió un error',
           statusText: 'fail',
         };
-        /* console.log('mi link: ', linkEvaluated);
-        console.log('status: ', objetoError.status);
-        console.log('statusText: ', objetoError.statusText); */
+        // console.log('mi link: ', linkEvaluated);
+        // console.log('status: ', objetoError.status);
+        // console.log('statusText: ', objetoError.statusText);
         // console.log(objetoError);
         return objetoError;
       }));
@@ -142,12 +142,6 @@ const validateLinksStatus = (arrayLinksArchive) => {
 
   return Promise.all(arrayPromises);
 };
-
-
-/* validateLinksStatus(['/src/index/sdesde/des.html']).then((response) => {
-  console.log(response);
-}); */
-
 
 module.exports = {
   pathConvertAbsolute,

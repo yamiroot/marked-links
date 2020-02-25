@@ -1,5 +1,5 @@
 {
-  "name": "lim011-fe-md-links",
+  "name": "md-links",
   "version": "1.0.0",
   "description": "libreria que lee y analiza archivos markdown",
   "main": "index.js",
@@ -7,6 +7,7 @@
     "test": "test"
   },
   "dependencies": {
+    "colors": "^1.4.0",
     "jsdom": "^16.1.0",
     "marked": "^0.8.0",
     "node-fetch": "^2.6.0"

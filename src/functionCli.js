@@ -1,3 +1,4 @@
+const colors = require('colors');
 const { mdLinks } = require('./index.js');
 
 
@@ -5,11 +6,11 @@ const cli = (array) => {
   // array[0]: Ruta.
 
   if (array.length === 0) {
-    return Promise.resolve('Por favor, ingrese una ruta.');
+    return Promise.resolve(colors.america('Por favor, ingrese una ruta.'));
   }
 
   if (array.length > 3) {
-    return Promise.resolve('Ha excedido el número de comandos permitidos.');
+    return Promise.resolve(colors.dim('Ha excedido el número de comandos permitidos.'));
   }
 
   if (array[1] === '--stats' && array.length === 2) {
@@ -20,7 +21,7 @@ const cli = (array) => {
     return mdLinks(array[0], { validate: true });
   }
 
-  return Promise.resolve('El comando ingresado no es válido.');
+  return Promise.resolve(colors.rainbow('El comando ingresado no es válido.'));
 };
 
 
