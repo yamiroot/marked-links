@@ -8,6 +8,8 @@ const fetch = require('node-fetch');
 
 const { JSDOM } = jsdom; // Destructuración
 
+// fs.existsSync(newPath): Devuelve true si la ruta existe, false de lo contrario.
+const isPathExists = (newPath) => fs.existsSync(newPath);
 
 // path.resolve(root): Devuelve un String.
 const pathConvertAbsolute = (newPath) => path.resolve(newPath);
@@ -146,6 +148,7 @@ const validateLinksStatus = (arrayLinksArchive) => {
 // validateLinksStatus(['//dzone.com/articlpplications-actually-work']);
 
 module.exports = {
+  isPathExists,
   pathConvertAbsolute,
   pathIsAbsolute,
   validateArchive,
