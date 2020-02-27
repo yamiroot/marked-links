@@ -7,27 +7,17 @@ const { mdLinks } = require('../src/index');
 
 describe('Cli', () => {
   const arrayReturn = [{
-    file: '/home/administrador/Escritorio/JsProject/LIM011-fe-md-links/MarkdownForTests/Readme.md',
-    href: 'https://dzone.com/articles/how-single-page-web-applications-actually-work',
+    file: path.join(process.cwd(), 'MarkdownForTests', 'Readme.md'),
+    href: 'https://dzone.com/articles/huwork',
     text: 'SPA',
-  }, {
-    file: '/home/administrador/Escritorio/JsProject/LIM011-fe-md-links/MarkdownForTests/Readme.md',
-    href: 'https://darwindigital.com/mobile-first-versus-responsive-web-design/',
-    text: 'mobile first',
   }];
 
   const arrayReturnStatus = [{
-    file: '/home/administrador/Escritorio/JsProject/LIM011-fe-md-links/MarkdownForTests/Readme.md',
-    href: 'https://dzone.com/articles/how-single-page-web-applications-actually-work',
+    file: path.join(process.cwd(), 'MarkdownForTests', 'Readme.md'),
+    href: 'https://dzone.com/articles/huwork',
     text: 'SPA',
-    status: 200,
-    statusText: 'ok',
-  }, {
-    file: '/home/administrador/Escritorio/JsProject/LIM011-fe-md-links/MarkdownForTests/Readme.md',
-    href: 'https://darwindigital.com/mobile-first-versus-responsive-web-design/',
-    text: 'mobile first',
-    status: 200,
-    statusText: 'ok',
+    status: 404,
+    statusText: 'fail',
   }];
 
   it('Debería ser una función.', () => {

@@ -128,20 +128,22 @@ const validateLinksStatus = (arrayLinksArchive) => {
       })
       .catch(() => {
         const objetoError = {
-          href: linkEvaluated,
+          href: linkEvaluated.href,
+          file: linkEvaluated.file,
+          text: linkEvaluated.text,
           status: 'ocurrió un error',
           statusText: 'fail',
         };
-        // console.log('mi link: ', linkEvaluated);
-        // console.log('status: ', objetoError.status);
-        // console.log('statusText: ', objetoError.statusText);
-        // console.log(objetoError);
+
         return objetoError;
       }));
   });
 
   return Promise.all(arrayPromises);
 };
+
+
+// validateLinksStatus(['//dzone.com/articlpplications-actually-work']);
 
 module.exports = {
   pathConvertAbsolute,

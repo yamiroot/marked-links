@@ -12,12 +12,11 @@ Aquí algunas ideas para inspirarte:
 - Salud
 - Energías Renovables
 
-Las **caraterísticas técnicas** de tu aplicación serán las siguientes:
-- Debe ser una Single-Page Application [SPA](https://dzone.com/articles/how-single-page-web-applications-actually-work)
-- Debe ser diseñada con un enfoque [mobile first](https://darwindigital.com/mobile-first-versus-responsive-web-design/)
+Las **características técnicas** de tu aplicación serán las siguientes:
+- Debe ser una Single-Page Application [SPA](https://dzone.com/articles/huwork)
 - Debe permitir la persintencia de datos
   
-Para implementar tu aplicación usarás *HTML5*, *CCS3* o *SASS*, *Vanilla JavaScript(ES6+)*, *Firebase* o *LocalStogarge*
+Para implementar tu aplicación usarás *HTML5*, *CCS3* o *sASS*, *Vanilla JavaScript(ES6+)*, *Firebase* o *LocalStogarge*
 
 ## Objetivo
 
