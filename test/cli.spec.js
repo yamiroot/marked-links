@@ -36,6 +36,14 @@ describe('Cli', () => {
       done();
     }));
 
+
+  it('Debería retornar una promesa cuyo valor resuelto es: "Por favor, ingrese un comando."',
+    (done) => cli([path.join(process.cwd(), 'MarkdownForTests', 'Readme.md')]).then((response) => {
+      expect(response).toBe(colors.bold('Por favor, ingrese un comando.'));
+      done();
+    }));
+
+
   it('Pasamos como parámetro la ruta y "--stats". Por ello, debería retornar una promesa cuyo valor resuelto es un array de objetos con las propiedades href, text, y file.',
     (done) => mdLinks(path.join(process.cwd(), 'MarkdownForTests', 'Readme.md'), { validate: false }).then((response) => {
       cli([path.join(process.cwd(), 'MarkdownForTests', 'Readme.md'), '--stats']).then(() => {
@@ -74,8 +82,15 @@ describe('Cli', () => {
     }));
 
   it('Debería retornar una promesa cuyo valor resuelto es: "El comando ingresado no es válido."',
-    (done) => cli(['cadena-invalida']).then((response) => {
+    (done) => cli([path.join(process.cwd(), 'MarkdownForTests', 'Readme.md'), 'comando-invalido']).then((response) => {
       expect(response).toBe(colors.rainbow('El comando ingresado no es válido.'));
+      done();
+    }));
+
+
+  it('Debería retornar una promesa fallida cuyo valor resuelto es: "La ruta ingresada NO existe"',
+    (done) => cli(['ruta-invalida']).catch((response) => {
+      expect(response).toStrictEqual(new Error(colors.cyan('La ruta ingresada NO existe')));
       done();
     }));
 });
