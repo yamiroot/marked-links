@@ -1,7 +1,7 @@
 const myFunctions = require('../src/main.js');
 
 const {
-  validateMarkdownsDirectory, validateArchive,
+  validateMarkdownsDirectory, validateArchive, isPathExists,
   linksOfArchivesMarkdown, validateLinksStatus, validateMarkdownsArchive,
 } = myFunctions;
 
@@ -9,8 +9,19 @@ const {
 const mdLinks = (newPath, opts) => {
   const pathValidated = myFunctions.pathIsAbsolute(newPath);
 
-  if (validateArchive(pathValidated)) {
-    const arrayArchivesMarkdown = validateMarkdownsArchive(pathValidated);
+  if (isPathExists(newPath)) {
+    if (validateArchive(pathValidated)) {
+      const arrayArchivesMarkdown = validateMarkdownsArchive(pathValidated);
+      const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
+
+      if (opts.validate) {
+        return validateLinksStatus(arrayLinksOfMarkdown);
+      }
+
+      return Promise.resolve(arrayLinksOfMarkdown);
+    }
+
+    const arrayArchivesMarkdown = validateMarkdownsDirectory(pathValidated);
     const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
 
     if (opts.validate) {
@@ -20,14 +31,7 @@ const mdLinks = (newPath, opts) => {
     return Promise.resolve(arrayLinksOfMarkdown);
   }
 
-  const arrayArchivesMarkdown = validateMarkdownsDirectory(pathValidated);
-  const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
-
-  if (opts.validate) {
-    return validateLinksStatus(arrayLinksOfMarkdown);
-  }
-
-  return Promise.resolve(arrayLinksOfMarkdown);
+  return Promise.reject(new Error('La ruta ingresada no existe.'));
 };
 
 
