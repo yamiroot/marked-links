@@ -1,0 +1,8 @@
+# Dependency directories
+node_modules
+
+# Coverage directory used by tools like istanbul
+coverage
+
+# Stores VSCode versions used for testing VSCode extensions
+.vscode-test
