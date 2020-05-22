@@ -4,6 +4,7 @@ const webIDLConversions = require("webidl-conversions");
 const { CSSStyleDeclaration } = require("cssstyle");
 const { Performance: RawPerformance } = require("w3c-hr-time");
 const notImplemented = require("./not-implemented");
+const { installInterfaces } = require("../living/interfaces");
 const { define, mixin } = require("../utils");
 const Element = require("../living/generated/Element");
 const EventTarget = require("../living/generated/EventTarget");
@@ -15,7 +16,7 @@ const { btoa, atob } = require("abab");
 const idlUtils = require("../living/generated/utils");
 const WebSocketImpl = require("../living/websockets/WebSocket-impl").implementation;
 const BarProp = require("../living/generated/BarProp");
-const Document = require("../living/generated/Document");
+const documents = require("../living/documents.js");
 const External = require("../living/generated/External");
 const Navigator = require("../living/generated/Navigator");
 const Performance = require("../living/generated/Performance");
@@ -27,15 +28,15 @@ const { fireAnEvent } = require("../living/helpers/events");
 const SessionHistory = require("../living/window/SessionHistory");
 const { forEachMatchingSheetRuleOfElement, getResolvedValue, propertiesWithResolvedValueImplemented } =
   require("../living/helpers/style-rules");
+const CustomElementRegistry = require("../living/generated/CustomElementRegistry");
 const jsGlobals = require("./js-globals.json");
 
 const GlobalEventHandlersImpl = require("../living/nodes/GlobalEventHandlers-impl").implementation;
 const WindowEventHandlersImpl = require("../living/nodes/WindowEventHandlers-impl").implementation;
 
-// NB: the require() must be after assigning `module.exports` because this require() is circular
-// TODO: this above note might not even be true anymore... figure out the cycle and document it, or clean up.
-module.exports = Window;
-const { installInterfaces } = require("../living/interfaces");
+exports.createWindow = function (options) {
+  return new Window(options);
+};
 
 const jsGlobalEntriesToInstall = Object.entries(jsGlobals).filter(([name]) => name in global);
 
@@ -119,21 +120,19 @@ function Window(options) {
   Object.defineProperty(idlUtils.implForWrapper(this), idlUtils.wrapperSymbol, { get: () => this._globalProxy });
 
   // List options explicitly to be clear which are passed through
-  this._document = Document.create(window, [], {
-    options: {
-      parsingMode: options.parsingMode,
-      contentType: options.contentType,
-      encoding: options.encoding,
-      cookieJar: options.cookieJar,
-      url: options.url,
-      lastModified: options.lastModified,
-      referrer: options.referrer,
-      concurrentNodeIterators: options.concurrentNodeIterators,
-      parseOptions: options.parseOptions,
-      defaultView: this._globalProxy,
-      global: this
-    }
-  });
+  this._document = documents.createWrapper(window, {
+    parsingMode: options.parsingMode,
+    contentType: options.contentType,
+    encoding: options.encoding,
+    cookieJar: options.cookieJar,
+    url: options.url,
+    lastModified: options.lastModified,
+    referrer: options.referrer,
+    concurrentNodeIterators: options.concurrentNodeIterators,
+    parseOptions: options.parseOptions,
+    defaultView: this._globalProxy,
+    global: this
+  }, { alwaysUseDocumentClass: true });
 
   if (vm.isContext(window)) {
     const documentImpl = idlUtils.implForWrapper(window._document);
@@ -223,6 +222,7 @@ function Window(options) {
   const navigator = Navigator.create(window, [], { userAgent: this._resourceLoader._userAgent });
   const performance = Performance.create(window, [], { rawPerformance });
   const screen = Screen.create(window);
+  const customElementRegistry = CustomElementRegistry.create(window);
 
   define(this, {
     get length() {
@@ -316,16 +316,13 @@ function Window(options) {
       }
 
       return this._sessionStorage;
+    },
+    get customElements() {
+      return customElementRegistry;
     }
   });
 
   namedPropertiesWindow.initializeWindow(this, this._globalProxy);
-
-  ///// METHODS for [ImplicitThis] hack
-  // See https://lists.w3.org/Archives/Public/public-script-coord/2015JanMar/0109.html
-  this.addEventListener = this.addEventListener.bind(this);
-  this.removeEventListener = this.removeEventListener.bind(this);
-  this.dispatchEvent = this.dispatchEvent.bind(this);
 
   ///// METHODS
 
@@ -399,8 +396,12 @@ function Window(options) {
         reportException(window, e, window.location.href);
       }
 
-      if (repeat && listOfActiveTimers.has(handle)) {
-        timerInitializationSteps(handler, timeout, args, { methodContext, repeat: true, previousHandle: handle });
+      if (listOfActiveTimers.has(handle)) {
+        if (repeat) {
+          timerInitializationSteps(handler, timeout, args, { methodContext, repeat: true, previousHandle: handle });
+        } else {
+          listOfActiveTimers.delete(handle);
+        }
       }
     }
 
@@ -444,14 +445,7 @@ function Window(options) {
     this.cancelAnimationFrame = function (handle) {
       handle = webIDLConversions["unsigned long"](handle);
 
-      if (mapOfAnimationFrameCallbacks.has(handle)) {
-        --numberOfOngoingAnimationFrameCallbacks;
-        if (numberOfOngoingAnimationFrameCallbacks === 0) {
-          clearInterval(animationFrameNodejsInterval);
-        }
-      }
-
-      mapOfAnimationFrameCallbacks.delete(handle);
+      removeAnimationFrameCallback(handle);
     };
 
     function runAnimationFrameCallbacks(now) {
@@ -461,7 +455,7 @@ function Window(options) {
         // This has() can be false if a callback calls cancelAnimationFrame().
         if (mapOfAnimationFrameCallbacks.has(handle)) {
           const callback = mapOfAnimationFrameCallbacks.get(handle);
-          mapOfAnimationFrameCallbacks.delete(handle);
+          removeAnimationFrameCallback(handle);
           try {
             callback(now);
           } catch (e) {
@@ -469,6 +463,17 @@ function Window(options) {
           }
         }
       }
+    }
+
+    function removeAnimationFrameCallback(handle) {
+      if (mapOfAnimationFrameCallbacks.has(handle)) {
+        --numberOfOngoingAnimationFrameCallbacks;
+        if (numberOfOngoingAnimationFrameCallbacks === 0) {
+          clearInterval(animationFrameNodejsInterval);
+        }
+      }
+
+      mapOfAnimationFrameCallbacks.delete(handle);
     }
   }
 
