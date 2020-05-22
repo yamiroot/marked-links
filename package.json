@@ -1,7 +1,7 @@
 {
   "name": "md-links",
-  "version": "1.0.0",
-  "description": "libreria que lee y analiza archivos markdown",
+  "version": "3.0.0",
+  "description": "Librería que analiza archivos markdown",
   "main": "src/index.js",
   "directories": {
     "test": "test"
@@ -17,7 +17,6 @@
     "eslint-config-airbnb-base": "^14.0.0",
     "eslint-plugin-import": "^2.20.0",
     "fetch-mock": "^9.0.0-beta.2",
-    "htmlhint": "^0.11.0",
     "jest": "^25.1.0"
   },
   "scripts": {
@@ -26,7 +25,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/YamiQuispe/LIM011-fe-md-links.git"
+    "url": "git+https://github.com/yamiquispe/md-links.git"
   },
   "keywords": [
     "md-links",
@@ -34,13 +33,13 @@
     "node.js",
     "javascript"
   ],
-  "author": "buscoanemo",
-  "license": "ISC",
+  "author": "yamiquispe",
+  "license": "MIT",
   "bin": {
     "md-links": "./src/returnCli.js"
   },
   "bugs": {
-    "url": "https://github.com/YamiQuispe/LIM011-fe-md-links/issues"
+    "url": "https://github.com/yamiquispe/md-links/issues"
   },
-  "homepage": "https://github.com/YamiQuispe/LIM011-fe-md-links#readme"
+  "homepage": "https://github.com/yamiquispe/md-links#readme"
 }
