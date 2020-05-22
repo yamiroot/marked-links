@@ -21,7 +21,7 @@
   },
   "scripts": {
     "test": "jest --coverage --verbose",
-    "comando": "echo 'este es mi comando'"
+    "comando": "echo 'este es mi comando ty'"
   },
   "repository": {
     "type": "git",
