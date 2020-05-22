@@ -1,4 +1,4 @@
-const myFunctions = require('../src/main.js');
+const myFunctions = require('./main.js');
 
 const {
   validateMarkdownsDirectory, validateArchive, isPathExists,
