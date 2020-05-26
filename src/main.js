@@ -1,24 +1,40 @@
 
-// Librerías node.js
-const path = require('path');
-const fs = require('fs');
+// Librerías
 
-// Librerías de Js
+// marked: Packete que actúa como compilador de bajo nivel para analizar markdowns
+// sin almacenar en caché o bloquear durante largos períodos de tiempo. Funciona
+// en un navegador, en un servidor o desde una interfaz de línea de comandos (CLI)
 const marked = require('marked');
 const jsdom = require('jsdom');
 const fetch = require('node-fetch');
 
+
+// Módulos de node.js
+
+// path: Proporciona utilidades para trabajar con rutas de archivos y directorios.
+const path = require('path');
+// fs: Proporciona una API para interactuar con el sistema de archivos.
+const fs = require('fs');
+
+
 const { JSDOM } = jsdom; // Destructuración
 
-// fs.existsSync(newPath): Devuelve true si la ruta existe, false de lo contrario.
+
+// token: Cadena de caracteres.
+
+
+// fs.existsSync(path): Método síncrono. Prueba si la ruta dada existe o no, verificando
+// el sistema de archivos. Devuelve true si la ruta existe, false de lo contrario.
 const isPathExists = (newPath) => fs.existsSync(newPath);
 
-// path.resolve(root): Devuelve un String.
+
+// path.resolve(path): Convierte una secuencia de rutas o segmentos de ruta en una
+// ruta absoluta. Retorna dicha ruta como String.
 const pathConvertAbsolute = (newPath) => path.resolve(newPath);
 
 
 const pathIsAbsolute = (newPath) => {
-  // path.isAbsolute(root): Retorna un booleano.
+  // path.isAbsolute(path): Determina si la ruta recibida es absoluta. Retorna un booleano.
 
   if (path.isAbsolute(newPath)) {
     return newPath;
@@ -29,16 +45,22 @@ const pathIsAbsolute = (newPath) => {
 
 
 // path.parse(path): Retorna un objeto.
-// path.extname(path): Devuelve la extensión de la ruta. (String)
+
+// path.extname(path): Devuelve la extensión de la ruta como String, desde la
+// última aparición del carácter . (punto) hasta el final de la cadena. Si no
+// hay ningún (.) en la última parte de la ruta, devolverá una cadena vacía.
 const validateTypeArchive = (newPath) => path.extname(newPath);
 
 
-// fs.stats.isFile(): Devuelve un booleano.
+// fs.statSync(path): Devuelve un objeto que proporciona información sobre un archivo.
+// stats.isFile(): Devuelve true si el objeto fs.Stats describe un archivo normal.
 const validateArchive = (newPath) => fs.statSync(newPath).isFile();
 // console.log(validateArchive('src/index.js'));
 
 
-// fs.stats.isDirectory(): Devuelve un booleano
+// fs.statSync(path): Devuelve un objeto que proporciona información sobre un archivo.
+// stats.isDirectory(): Devuelve true si el objeto fs.Stats describe un directorio
+// del sistema de archivos.
 const validateDirectory = (newPath) => fs.statSync(newPath).isDirectory();
 // console.log(validateDirectory('src'));
 
@@ -55,12 +77,20 @@ const validateMarkdownsArchive = (newPath) => {
 
 
 const validateMarkdownsDirectory = (newPath) => {
-  // fs.readdirSync (ruta, opciones): Lee la ruta y devuelve una array de Strings(rutas).
+  // fs.readdirSync (ruta, opcion): Método síncrono que lee la ruta de un directorio y
+  // devuelve un array de rutas de archivos.
+  // Parámetros:
+  // - path: Ruta del directorio.
+  // - opcion: Especifica la codificación de caracteres que se utilizará para los
+  // nombres de los archivo devueltos. 'utf-8' determina una codificación en String.
   const arrayPaths = fs.readdirSync(newPath, 'utf-8');
+
   let arrayOfLinksMarkdown = [];
 
   arrayPaths.forEach((file) => {
-    // path.join([...paths]): Retorna un String.
+    // path.join([...paths]): Une todos los segmentos de rutas dados juntos usando el
+    // separador específico de la plataforma como delimitador, luego normaliza la ruta
+    // resultante. Retorna la ruta normalizada como String.
     const pathName = path.join(newPath, file);
 
     if (validateDirectory(pathName)) {
@@ -89,8 +119,23 @@ const linksOfArchivesMarkdown = (arrayOfLinksMarkdown) => {
   const arrayLinksArchive = [];
 
   arrayOfLinksMarkdown.forEach((fileMarkdown) => {
+    // fs.readFileSync(path, options): Lee sincrónicamente todo el contenido de
+    // un archivo y devuelve el contenido de la ruta.
+    // Parámetros:
+    // - path: Nombre de archivo o descriptor de archivo.
+    // - options: Especifica la codificación de caracteres del valor retornado.
     const markdown = fs.readFileSync(fileMarkdown, 'utf-8');
+
+    // marked.lexer(md): Toma un string markdown y llama a las funciones tokeniser.
+    // Retorna una serie de tokens.
+    // Parámetro:
+    // - md: Contenido del archivo markdown.
     const tokens = marked.lexer(markdown);
+
+    // marked.parser(tokens): Toma tokens como entrada y llama a las funciones renderer.
+    // Asegura la traducción correcta del token al lenguaje Html.
+    // Parámetro:
+    // - tokens: Matriz de tokens.
     const html = marked.parser(tokens);
     const dom = new JSDOM(html);
 

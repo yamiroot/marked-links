@@ -93,9 +93,9 @@ describe('Valido la información y los estados de los links en los archivos Mark
     }));
 
 
-  it('Si es un archivo y validate es "false", debería retornar un array de objetos con las propiedades: href, text y file.',
-    (done) => mdLinks(path.join(process.cwd(), 'MarkdownForTests', 'Readme.md'), { validate: false }).then((response) => {
-      expect(response).toStrictEqual(informationLinkArchive);
+  it('Si es una ruta inválida debería retornar un error.',
+    (done) => mdLinks(path.join(process.cwd(), 'Markdown', 'Readme.md')).catch((response) => {
+      expect(response).toStrictEqual(new Error('La ruta ingresada no existe.'));
       done();
     }));
 });
