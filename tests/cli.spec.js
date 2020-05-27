@@ -88,9 +88,9 @@ describe('Cli', () => {
     }));
 
 
-  it('Debería retornar una promesa fallida cuyo valor resuelto es: "La ruta ingresada NO existe"',
+  it('Debería retornar una promesa fallida cuyo valor resuelto es: "La ruta ingresada no existe"',
     (done) => cli(['ruta-invalida']).catch((response) => {
-      expect(response).toStrictEqual(new Error(colors.cyan('La ruta ingresada NO existe')));
+      expect(response).toStrictEqual(new Error(colors.cyan('La ruta ingresada no existe')));
       done();
     }));
 });
