@@ -2,8 +2,10 @@
   "name": "md-links",
   "version": "3.0.0",
   "description": "Librería que analiza archivos markdown",
-  "main": "src/index.js",
+  "main": "lib/api/index.js",
   "directories": {
+    "lib": "lib",
+    "src": "src",
     "test": "test"
   },
   "dependencies": {
@@ -36,7 +38,7 @@
   "author": "yamiquispe",
   "license": "MIT",
   "bin": {
-    "md-links": "./src/returnCli.js"
+    "md-links": "./lib/cli/response-cli.js"
   },
   "bugs": {
     "url": "https://github.com/yamiroot/md-links/issues"
