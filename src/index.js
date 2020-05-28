@@ -11,21 +11,29 @@ const validateLinks = (pathValidated, opts) => {
     const arrayArchivesMarkdown = validateMarkdownsArchive(pathValidated);
     const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
 
-    if ((opts[0] !== undefined) && opts[0].validate && arrayLinksOfMarkdown.length !== 0) {
-      return validateLinksStatus(arrayLinksOfMarkdown);
+    if (arrayLinksOfMarkdown.length > 0) {
+      if ((opts[0] !== undefined) && opts[0].validate) {
+        return validateLinksStatus(arrayLinksOfMarkdown);
+      }
+
+      return Promise.resolve(arrayLinksOfMarkdown);
     }
 
-    return (arrayLinksOfMarkdown.length === 0) ? Promise.resolve('La ruta ingresada corresponde a un archivo que no es markdown.') : Promise.resolve(arrayLinksOfMarkdown);
+    return Promise.resolve('La ruta ingresada corresponde a un archivo que no es markdown.');
   }
 
   const arrayArchivesMarkdown = validateMarkdownsDirectory(pathValidated);
   const arrayLinksOfMarkdown = linksOfArchivesMarkdown(arrayArchivesMarkdown);
 
-  if ((opts[0] !== undefined) && opts[0].validate && arrayLinksOfMarkdown.length !== 0) {
-    return validateLinksStatus(arrayLinksOfMarkdown);
+  if (arrayLinksOfMarkdown.length > 0) {
+    if ((opts[0] !== undefined) && opts[0].validate) {
+      return validateLinksStatus(arrayLinksOfMarkdown);
+    }
+
+    return Promise.resolve(arrayLinksOfMarkdown);
   }
 
-  return (arrayLinksOfMarkdown.length === 0) ? Promise.resolve('La ruta ingresada corresponde a un directorio vacío o bien, no contiene archivos markdown.') : Promise.resolve(arrayLinksOfMarkdown);
+  return Promise.resolve('La ruta ingresada corresponde a un directorio vacío o bien, no contiene archivos markdown.');
 };
 
 
