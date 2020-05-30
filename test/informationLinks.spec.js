@@ -2,7 +2,7 @@ const path = require('path');
 
 const {
   linksOfArchivesMarkdown, validateLinksStatus,
-} = require('../src/main.js');
+} = require('../lib/api/validate-links');
 
 
 describe('Obtengo la información de los links en cada archivo markdown.', () => {

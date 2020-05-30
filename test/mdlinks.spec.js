@@ -2,7 +2,7 @@ const path = require('path');
 const process = require('process');
 
 
-const { mdLinks } = require('../src/index.js');
+const { mdLinks } = require('../lib/api/index');
 
 
 describe('Valido la ruta recibida, según ello retornará o no la información y los estados de los links de los archivos Markdown.', () => {

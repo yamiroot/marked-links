@@ -2,9 +2,11 @@
 const nodeFetch = jest.requireActual('node-fetch');
 const fetchMock = require('fetch-mock').sandbox();
 
+
 Object.assign(fetchMock.config, {
   fetch: nodeFetch,
 });
+
 
 fetchMock
   .mock('https://developer.mozilla.org/es/docs/Web/JavaScript/Referencia/Sentencias/import', 200)

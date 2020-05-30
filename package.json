@@ -22,8 +22,9 @@
     "jest": "^25.1.0"
   },
   "scripts": {
+    "eslint": "eslint --ext .js lib/ test/",
     "test": "jest --coverage --verbose",
-    "comando": "echo 'este es mi comando ty'"
+    "root": "echo 'Hello word from md-links'"
   },
   "repository": {
     "type": "git",

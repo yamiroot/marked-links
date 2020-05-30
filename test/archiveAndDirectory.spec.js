@@ -4,7 +4,7 @@ const path = require('path');
 const {
   validateArchive, validateDirectory, validateTypeArchive, validateMarkdownsArchive,
   validateMarkdownsDirectory,
-} = require('../src/main.js');
+} = require('../lib/api/validate-markdowns');
 
 
 describe('Valido si recibo un archivo.', () => {

@@ -1,8 +1,8 @@
 const path = require('path');
 const colors = require('colors');
 
-const { cli } = require('../src/functionCli.js');
-const { mdLinks } = require('../src/index');
+const { cli } = require('../lib/cli/cli');
+const { mdLinks } = require('../lib/api/index');
 
 
 describe('Cli', () => {
