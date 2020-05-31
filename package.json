@@ -1,7 +1,7 @@
 {
-  "name": "md-links",
+  "name": "marked-links",
   "version": "3.0.0",
-  "description": "Librería que analiza archivos markdown",
+  "description": "Librería que analiza links de los archivos markdown",
   "main": "lib/api/index.js",
   "directories": {
     "lib": "lib",
@@ -24,25 +24,26 @@
   "scripts": {
     "eslint": "eslint --ext .js lib/ test/",
     "test": "jest --coverage --verbose",
-    "root": "echo 'Hello word from md-links'"
+    "root": "echo 'Hello word from marked-links'"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/yamiroot/md-links.git"
+    "url": "git+https://github.com/yamiroot/marked-links.git"
   },
   "keywords": [
-    "md-links",
+    "links",
     "markdown",
     "node.js",
-    "javascript"
+    "javascript",
+    "library"
   ],
-  "author": "yamiquispe",
+  "author": "yamiroot",
   "license": "MIT",
   "bin": {
     "md-links": "./lib/cli/response-cli.js"
   },
   "bugs": {
-    "url": "https://github.com/yamiroot/md-links/issues"
+    "url": "https://github.com/yamiroot/marked-links/issues"
   },
-  "homepage": "https://github.com/yamiroot/md-links#readme"
+  "homepage": "https://github.com/yamiroot/marked-links#readme"
 }
