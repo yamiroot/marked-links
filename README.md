@@ -28,6 +28,8 @@ la información que se quiere compartir.
 `Marked-Links` es una librería que lee y analiza archivos en formato `Markdown`,
 para verificar los links que contengan y reportar algunas estadísticas.
 
+<p align="center"><a href="src/assets/marked-links.png"><img src="src/assets/marked-links.png"></a><p>
+
 
 ## Consideraciones generales
 
