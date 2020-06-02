@@ -1,4 +1,4 @@
-<p align="center"><a href="src/assets/marked-link.png"><img src="src/assets/marked-link.png" width=80px></a></p>
+<p align="center"><a href="src/assets/logo.png"><img src="src/assets/logo.png" width=80px></a></p>
 <h1 align="center">Marked Links</h1>
 <p align="center">
 <img src="https://img.shields.io/badge/build-passing-brightgreen">
