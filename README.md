@@ -153,10 +153,10 @@ URL que responde ok, entonces consideraremos el link como ok.
 Por ejemplo:
 
 ```sh
-$ md-links ./some/example --validate
-./some/example/example.md http://algo.com/2/3/ ok 200 Link a algo
-./some/example/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
-./some/example/example.md http://google.com/ ok 301 Google
+$ md-links ./some/example.md --validate
+./some/example.md http://algo.com/2/3/ ok 200 Link a algo
+./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
+./some/example.md http://google.com/ ok 301 Google
 ```
 
 Vemos que el _output_ en este caso incluye la palabra `ok` o `fail` después de
