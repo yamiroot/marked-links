@@ -203,4 +203,11 @@ Broken: 1
 - [usr/bin/env node](https://www.it-swarm.dev/es/node.js/que-hace-exactamente-usrbinenv-node-al-principio-de-los-archivos-de-nodo/1056706740/)
 - [Shebang](https://es.wikipedia.org/wiki/Shebang)
 - [Herencia del Unix](http://www.juntadeandalucia.es/empleo/recursos/material_didactico/especialidades/materialdidactico_tic_linux_basico/tema_004/archivos/apartado_002.html)
+- [package.json](http://wiki.commonjs.org/wiki/Packages/1.0)
+- [Publicar primer módulo - video](https://www.youtube.com/watch?v=grOjfJpqwyw&start=12s)
+
+
+## Licencia
+
+Copyleft 🄯 2020, Licencia MIT.
 
