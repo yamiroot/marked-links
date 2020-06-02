@@ -7,6 +7,7 @@
 <img src="https://img.shields.io/badge/coverage-100%25-brightgreen">
 </p>
 
+
 ## Preámbulo
 
 [Markdown](https://es.wikipedia.org/wiki/Markdown) es un lenguaje de marcado
@@ -14,13 +15,15 @@ ligero. Es usado en muchísimas plataformas que manejan texto plano (GitHub,
 foros, blogs, ...), y es muy común encontrar varios archivos en ese formato 
 en cualquier tipo de repositorio (empezando por el tradicional `README.md`).
 
-## El problema:
+
+## El problema
 
 Estos archivos `Markdown` normalmente contienen _links_ (vínculos/ligas) que
 muchas veces están rotos o ya no son válidos y eso perjudica mucho el valor de
 la información que se quiere compartir.
 
-## La solución:
+
+## La solución
 
 `Marked-Links` es una librería que lee y analiza archivos en formato `Markdown`,
 para verificar los links que contengan y reportar algunas estadísticas.
@@ -29,61 +32,48 @@ para verificar los links que contengan y reportar algunas estadísticas.
 ## Consideraciones generales
 
 - `Marked-Links` se ejecuta con `Node.js` lo que nos permite ejecutar JavaScript en el 
-entorno del sistema operativo ya sea en tu máquina o un servidor, y así poder 
-interactuar con el sistema de archivos, entorno, redes, etc.
+entorno del sistema operativo ya sea en tu máquina o un servidor, y así poder interactuar 
+con el sistema de archivos, entorno, redes, etc.
 
 - El _parseado_ (análisis) del markdown para extraer los links se realiza mediante una 
-combinación de _módulos_; primero, transformamos el markdown a HTML usando
+combinación de _módulos_; primero, transformamos el markdown a `HTML` usando
 [marked](https://github.com/markedjs/marked) y de ahí extraemos los links con una librería 
-de DOM, en este caso [JSDOM](https://github.com/jsdom/jsdom).
+de `DOM`, en este caso [JSDOM](https://github.com/jsdom/jsdom).
 
-- La librería incluye un _ejecutable_ que podemos invocar en la línea de comando como 
-una interfaz que podemos importar con `require` para usarlo programáticamente.
+- La librería incluye un _ejecutable_ que podemos invocar en la línea de comando y una
+interfaz que podemos importar con `require` para usarlo programáticamente.
 
-- El módulo es instalable desde el registro público de NPM y también, directamente desde
-Github (ya que el respositorio es público y contiene un `package.json` válido).
+- El módulo es instalable desde el registro público de `NPM` y, también, desde `Github` ya 
+que el repositorio es público y contiene un `package.json` válido.
 
 
-## Algoritmo empleado:
+## Algoritmo empleado
+
+El diagrama de flujo fue elaborado con el programa [Dia](https://es.wikipedia.org/wiki/Dia_(programa)).
+
 <a href="src/utils/df.png"><img src="src/utils/df.png"></a>
 
-## Criterios de aceptacion
 
-Estos son los criterios de lo que debe ocurrir para que se satisfagan 
-las necesidades del usuario:
+## Instalación
 
-- Instalar la libreria via `npm install --global <github-user>/md-links`
+- Desde `NPM`:
 
-### `README.md`
+```
+$ npm install marked-links
+```
 
-- Encontrar el *pseudo codigo* o *diagrama de flujo* con el algoritmo que
-  soluciona el problema.
-- Encontrar un board con el backlog para la implementación de la librería.
-- Encontrar la documentación técnica de la librería.
-- Encontrar la Guía de uso e instalación de la librería.
+- Desde `Github`: 
 
-### API `mdLinks(path, opts)`
-
-- El módulo exporta una función con la interfaz (API) esperada.
-- El módulo implementa soporte para archivo individual
-- El módulo implementa soporte para directorios
-- El módulo implementa `options.validate`
-
-### CLI
-
-- Expone ejecutable `md-links` en el path (configurado en `package.json`)
-- Se ejecuta sin errores / output esperado.
-- El ejecutable implementa `--validate`.
-- El ejecutable implementa `--stats`.
-- El ejecutable implementa `--validate` y `--stats` juntos.
+```
+$ npm install @yamiroot/marked-links
+```
 
 
-### JavaScript API
+## Guía de uso
 
-El módulo debe poder importarse en otros scripts de Node.js y debe ofrecer la
-siguiente interfaz:
+### Como módulo:
 
-#### `mdLinks(path, options)`
+#### API `mdLinks(path, options)`
 
 ##### Argumentos
 
@@ -96,9 +86,9 @@ siguiente interfaz:
 
 ##### Valor de retorno
 
-La función debe retornar una promesa (`Promise`) que resuelva a un arreglo
-(`Array`) de objetos (`Object`), donde cada objeto representa un link y contiene
-las siguientes propiedades:
+La función retorna una promesa (`Promise`) que resuelve un arreglo (`Array`) de 
+objetos (`Object`), donde cada objeto representa un link y contiene las siguientes
+propiedades:
 
 - `href`: URL encontrada.
 - `text`: Texto que aparecía dentro del link (`<a>`).
@@ -128,10 +118,11 @@ mdLinks("./some/dir")
   .catch(console.error);
 ```
 
-### CLI (Command Line Interface - Interfaz de Línea de Comando)
+### Como ejecutable:
 
-El ejecutable de nuestra aplicación debe poder ejecutarse de la siguiente
-manera a través de la terminal:
+#### CLI (Command Line Interface - Interfaz de Línea de Comando)
+
+El ejecutable se ejecuta de la siguiente manera a través de la terminal:
 
 `md-links <path-to-file> [options]`
 
@@ -144,17 +135,16 @@ $ md-links ./some/example.md
 ./some/example.md http://google.com/ Google
 ```
 
-El comportamiento por defecto no debe validar si las URLs responden ok o no,
+El comportamiento por defecto no debe validar si las URLs responden `ok` o `fail`,
 solo debe identificar el archivo markdown (a partir de la ruta que recibe como
-argumento), analizar el archivo Markdown e imprimir los links que vaya
-encontrando, junto con la ruta del archivo donde aparece y el texto
-que hay dentro del link (truncado a 50 caracteres).
+argumento), analizar el mismo e imprimir los links que vaya encontrando, junto 
+con la ruta del archivo donde aparece y el texto dentro del link.
 
 #### Options
 
 ##### `--validate`
 
-Si pasamos la opción `--validate`, el módulo debe hacer una petición HTTP para
+Si pasamos la opción `--validate`, el módulo realiza una petición HTTP para
 averiguar si el link funciona o no. Si el link resulta en una redirección a una
 URL que responde ok, entonces consideraremos el link como ok.
 
@@ -204,17 +194,13 @@ Broken: 1
 
 ## Recursos
 
-- [What exactly is Node.js? - freeCodeCamp](https://medium.freecodecamp.org/what-exactly-is-node-js-ae36e97449f5)
-- [¿Qué es Node.js y para qué sirve? - drauta.com](https://www.drauta.com/que-es-nodejs-y-para-que-sirve)
-- [¿Qué es Nodejs? Javascript en el Servidor - Fazt en YouTube](https://www.youtube.com/watch?v=WgSc1nv_4Gw)
-- [¿Simplemente qué es Node.js? - IBM Developer Works, 2011](https://www.ibm.com/developerworks/ssa/opensource/library/os-nodejs/index.html)
-- [Node.js y npm](https://www.genbeta.com/desarrollo/node-js-y-npm)
 - [Módulos, librerías, paquetes, frameworks... ¿cuál es la diferencia?](http://community.laboratoria.la/t/modulos-librerias-paquetes-frameworks-cual-es-la-diferencia/175)
-- [Asíncronía en js](https://carlosazaustre.com/manejando-la-asincronia-en-javascript/)
-- [NPM](https://docs.npmjs.com/getting-started/what-is-npm)
-- [Publicar packpage](https://docs.npmjs.com/getting-started/publishing-npm-packages)
-- [Crear módulos en Node.js](https://docs.npmjs.com/getting-started/publishing-npm-packages)
 - [Linea de comando CLI](https://medium.com/netscape/a-guide-to-create-a-nodejs-command-line-package-c2166ad0452e)
 - [Promise](https://javascript.info/promise-basics)
+- [Pill de recursión - video](https://www.youtube.com/watch?v=lPPgY3HLlhQ&t=916s)
+- [Destructuring](https://codeburst.io/es6-destructuring-the-complete-guide-7f842d08b98f)
 - [Comprendiendo Promesas en Js](https://hackernoon.com/understanding-promises-in-javascript-13d99df067c1)
+- [usr/bin/env node](https://www.it-swarm.dev/es/node.js/que-hace-exactamente-usrbinenv-node-al-principio-de-los-archivos-de-nodo/1056706740/)
+- [Shebang](https://es.wikipedia.org/wiki/Shebang)
+- [Herencia del Unix](http://www.juntadeandalucia.es/empleo/recursos/material_didactico/especialidades/materialdidactico_tic_linux_basico/tema_004/archivos/apartado_002.html)
 
