@@ -29,6 +29,8 @@ la información que se quiere compartir.
 `Marked-Links` es una librería que lee y analiza archivos en formato `Markdown`,
 para verificar los links que contengan y reportar algunas estadísticas.
 
+<p align="center"><a href="src/assets/marked-links.png"><img src="src/assets/marked-links.png"></a><p>
+
 
 ## Consideraciones generales
 
@@ -112,7 +114,7 @@ mdLinks("./some/example.md", { validate: true })
   })
   .catch(console.error);
 
-mdLinks("./some/dir")
+mdLinks("./some/dir", { validate: false })
   .then(links => {
     // => [{ href, text, file }]
   })
@@ -151,8 +153,8 @@ URL que responde ok, entonces consideraremos el link como ok.
 
 Por ejemplo:
 
-```sh13d99df067c1
-$ md-13d99df067c1
+```sh
+$ md-links ./some/example.md --validate
 ./some/example.md http://algo.com/2/3/ ok 200 Link a algo
 ./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
 ./some/example.md http://google.com/ ok 301 Google
