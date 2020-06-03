@@ -35,7 +35,8 @@
     "markdown",
     "node.js",
     "javascript",
-    "library"
+    "library",
+    "marked-links"
   ],
   "author": "yamiroot",
   "license": "MIT",
