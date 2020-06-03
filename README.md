@@ -2,8 +2,9 @@
 <h1 align="center">Marked Links</h1>
 <p align="center">
 <img src="https://img.shields.io/badge/build-passing-brightgreen">
-<img src="https://img.shields.io/badge/license-MIT-9cf">
 <img src="https://img.shields.io/badge/npm-v6.14.5-important">
+<img src="https://img.shields.io/badge/license-MIT-9cf">
+<img src="https://img.shields.io/badge/code--size-25.9kB-blueviolet">
 <img src="https://img.shields.io/badge/coverage-100%25-brightgreen">
 </p>
 
@@ -67,7 +68,7 @@ $ npm install marked-links
 - Desde `Github`: 
 
 ```
-$ npm install @yamiroot/marked-links
+$ npm install yamiroot/marked-links
 ```
 
 
@@ -113,7 +114,7 @@ mdLinks("./some/example.md", { validate: true })
   })
   .catch(console.error);
 
-mdLinks("./some/dir")
+mdLinks("./some/dir", { validate: false })
   .then(links => {
     // => [{ href, text, file }]
   })
@@ -152,8 +153,8 @@ URL que responde ok, entonces consideraremos el link como ok.
 
 Por ejemplo:
 
-```sh13d99df067c1
-$ md-13d99df067c1
+```sh
+$ md-links ./some/example.md --validate
 ./some/example.md http://algo.com/2/3/ ok 200 Link a algo
 ./some/example.md https://otra-cosa.net/algun-doc.html fail 404 algún doc
 ./some/example.md http://google.com/ ok 301 Google
