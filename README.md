@@ -36,7 +36,7 @@ para verificar los links que contengan y reportar algunas estadísticas.
 ## Documentación y publicación
 
 - [Documentación completa de `Marked Links`.](https://yamipqm.gitbook.io/marked-links/)
-- [Publicación de `Marked Links` en `NPM`](https://www.npmjs.com/package/marked-links)
+- [Publicación de `Marked Links` en `NPM`.](https://www.npmjs.com/package/marked-links)
 
 
 ## Consideraciones generales
