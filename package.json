@@ -1,8 +1,9 @@
 {
   "name": "marked-links",
-  "version": "3.0.0",
+  "version": "3.1.1",
   "description": "Librería que analiza links de los archivos markdown",
   "main": "lib/api/index.js",
+  "homepage": "https://yamipqm.gitbook.io/marked-links/",
   "directories": {
     "lib": "lib",
     "src": "src",
@@ -35,7 +36,8 @@
     "markdown",
     "node.js",
     "javascript",
-    "library"
+    "library",
+    "marked-links"
   ],
   "author": "yamiroot",
   "license": "MIT",
@@ -44,6 +46,5 @@
   },
   "bugs": {
     "url": "https://github.com/yamiroot/marked-links/issues"
-  },
-  "homepage": "https://github.com/yamiroot/marked-links#readme"
+  }
 }

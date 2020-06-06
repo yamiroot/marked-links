@@ -29,7 +29,14 @@ la información que se quiere compartir.
 `Marked-Links` es una librería que lee y analiza archivos en formato `Markdown`,
 para verificar los links que contengan y reportar algunas estadísticas.
 
-<p align="center"><a href="src/assets/marked-links.png"><img src="src/assets/marked-links.png"></a><p>
+<p align="center"><a href="src/assets/marked-links.png"><img src="src/assets/marked-links.png"></a><br>
+<i>Logo de la librería en el CLI.</i><p>
+
+
+## Documentación y publicación
+
+- [Documentación completa de `Marked Links`.](https://yamipqm.gitbook.io/marked-links/)
+- [Publicación de `Marked Links` en `NPM`](https://www.npmjs.com/package/marked-links)
 
 
 ## Consideraciones generales
@@ -50,11 +57,11 @@ interfaz que podemos importar con `require` para usarlo programáticamente.
 que el repositorio es público y contiene un `package.json` válido.
 
 
-## Algoritmo empleado
+## Algoritmo de la herramienta
 
 El diagrama de flujo fue elaborado con el programa [Dia](https://es.wikipedia.org/wiki/Dia_(programa)).
 
-<a href="src/utils/df.png"><img src="src/utils/df.png"></a>
+<br><a href="src/utils/df.png"><img src="src/utils/df.png"></a><br>
 
 
 ## Instalación
@@ -114,7 +121,7 @@ mdLinks("./some/example.md", { validate: true })
   })
   .catch(console.error);
 
-mdLinks("./some/dir", { validate: false })
+mdLinks("./some/example.md", { validate: false })
   .then(links => {
     // => [{ href, text, file }]
   })
@@ -208,6 +215,7 @@ Broken: 1
 - [Herencia del Unix](http://www.juntadeandalucia.es/empleo/recursos/material_didactico/especialidades/materialdidactico_tic_linux_basico/tema_004/archivos/apartado_002.html)
 - [package.json](http://wiki.commonjs.org/wiki/Packages/1.0)
 - [Publicar primer módulo - video](https://www.youtube.com/watch?v=grOjfJpqwyw&start=12s)
+- [Tutorial NPM](https://codingpotions.com/npm-tutorial)
 
 
 ## Licencia
