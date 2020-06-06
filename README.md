@@ -208,6 +208,7 @@ Broken: 1
 - [Herencia del Unix](http://www.juntadeandalucia.es/empleo/recursos/material_didactico/especialidades/materialdidactico_tic_linux_basico/tema_004/archivos/apartado_002.html)
 - [package.json](http://wiki.commonjs.org/wiki/Packages/1.0)
 - [Publicar primer módulo - video](https://www.youtube.com/watch?v=grOjfJpqwyw&start=12s)
+- [Tutorial NPM](https://codingpotions.com/npm-tutorial)
 
 
 ## Licencia
