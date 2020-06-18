@@ -199,7 +199,7 @@ Broken: 1
 - Dependencias: `marked`, `node-fetch`, `jsdom` y `colors`.
 - Linter: `Eslint`.
 - Otras tecnologías: `Jest`.
-- Las pruebas unitarias cubren el 100% de `coverage`.
+- Las pruebas unitarias cubren el 100% de `coverage` y pueden ejecutarse en todos los sistemas operativos.
 
 
 ## Recursos
